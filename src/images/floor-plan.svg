@@ -1,0 +1,23 @@
+<!-- src/images/floor-plan.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 100">
+  <!-- Группа для комнаты 1 -->
+  <g id="room1" class="room" data-name="Room 1" data-info="This is room 1">
+    <rect x="10" y="10" width="30" height="30" fill="blue" />
+    <rect x="20" y="20" width="10" height="10" fill="red" />
+  </g>
+  
+  <!-- Группа для комнаты 2 -->
+  <g id="room2" class="room" data-name="Room 2" data-info="This is room 2">
+    <rect x="50" y="10" width="30" height="30" fill="green" />
+  </g>
+  
+  <!-- Группа для комнаты 3 -->
+  <g id="room3" class="room" data-name="Room 3" data-info="This is room 3">
+    <rect x="10" y="50" width="30" height="30" fill="red" />
+  </g>
+  
+  <!-- Группа для комнаты 4 -->
+  <g id="room4" class="room" data-name="Room 4" data-info="This is room 4">
+    <rect x="50" y="50" width="30" height="30" fill="yellow" />
+  </g>
+</svg>
