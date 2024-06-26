@@ -13,7 +13,7 @@
 <g id="114">
 <rect id="m114" x="1195.5" y="168.112" width="44" height="58.3878" fill="#A5A5A5" stroke="black"/>
 <rect id="b114" x="1239.5" y="130.5" width="56" height="96" fill="#A5A5A5" stroke="black"/>
-<rect id="union114" x="1195.5" y="131.5" width="99" height="94" stroke="black" stroke-width="3"/>
+<rect id="block114" x="1195.5" y="131.5" width="99" height="94" stroke="black" stroke-width="3"/>
 </g>
 <g id="kitchen">
 <path id="Vector 1" d="M1152 167H1167M1167 167H1177V155H1172M1167 167V155H1172M1172 155V159.5V151" stroke="black"/>
@@ -22,15 +22,12 @@
 <g id="112">
 <rect id="m112" x="1107.5" y="168.112" width="44" height="58.3878" fill="#A5A5A5" stroke="black"/>
 <rect id="b112" x="1056.5" y="130.5" width="51" height="96" fill="#A5A5A5" stroke="black"/>
-<rect id="unit112" x="1057.5" y="131.5" width="94.9898" height="94" stroke="black" stroke-width="3"/>
+<rect id="block112" x="1057.5" y="131.5" width="94.9898" height="94" stroke="black" stroke-width="3"/>
 </g>
 <rect id="enter" x="1003.5" y="130.5" width="53" height="97" fill="#D9D9D9" stroke="black"/>
 <rect id="vahta" x="960.5" y="130.5" width="43" height="97" fill="#D9D9D9" stroke="black"/>
 <rect id="kvant" x="765.5" y="130.5" width="150" height="97" fill="#D9D9D9" stroke="black"/>
-<g id="110">
-<rect id="m110" x="915.5" y="168.5" width="45" height="59" fill="#A5A5A5" stroke="black"/>
-<rect id="unit110" x="916.5" y="132.5" width="42" height="92" stroke="black" stroke-width="3"/>
-</g>
+<rect id="m4" x="915.5" y="168.5" width="45" height="59" fill="#A5A5A5" stroke="black"/>
 </g>
 <rect x="766.5" y="130.5" width="530" height="96" stroke="black"/>
 </g>
@@ -44,25 +41,25 @@
 <g id="106">
 <rect id="m106" x="485.5" y="296.5" width="44" height="57" fill="#A5A5A5" stroke="black"/>
 <rect id="b106" x="434.5" y="254.5" width="51" height="99" fill="#A5A5A5" stroke="black"/>
-<rect id="unit106" x="434.5" y="255.5" width="94" height="97" stroke="black" stroke-width="3"/>
+<rect id="block106" x="434.5" y="255.5" width="94" height="97" stroke="black" stroke-width="3"/>
 </g>
 <g id="104">
 <rect id="b104" x="382.5" y="254.5" width="51" height="99" fill="#A5A5A5" stroke="black"/>
 <rect id="m104" x="338.5" y="296.5" width="44" height="57" fill="#A5A5A5" stroke="black"/>
-<rect id="unit104" x="337.5" y="255.5" width="97" height="97" stroke="black" stroke-width="3"/>
+<rect id="block104" x="337.5" y="255.5" width="97" height="97" stroke="black" stroke-width="3"/>
 </g>
 <rect id="unknow" x="190.5" y="254.5" width="51" height="99" fill="#D9D9D9" stroke="black"/>
 <g id="102">
 <rect id="b102" x="241.5" y="254.5" width="52" height="99" fill="#A5A5A5" stroke="black"/>
 <rect id="m102" x="293.5" y="296.5" width="45" height="57" fill="#A5A5A5" stroke="black"/>
-<rect id="unit102" x="242.5" y="255.5" width="95" height="97" stroke="black" stroke-width="3"/>
+<rect id="block102" x="242.5" y="255.5" width="95" height="97" stroke="black" stroke-width="3"/>
 </g>
 <g id="100">
 <rect id="m100(4)" x="142.5" y="296.5" width="48" height="57" fill="#A5A5A5" stroke="black"/>
 <rect id="m100(3)" x="100.5" y="296.5" width="42" height="57" fill="#A5A5A5" stroke="black"/>
 <rect id="m100(2)" x="58.5" y="296.5" width="42" height="57" fill="#A5A5A5" stroke="black"/>
 <rect id="m100(1)" x="1.5" y="296.5" width="57" height="57" fill="#A5A5A5" stroke="black"/>
-<rect id="unit100" x="2.5" y="255.5" width="187" height="97" stroke="black" stroke-width="3"/>
+<rect id="block100" x="2.5" y="255.5" width="187" height="97" stroke="black" stroke-width="3"/>
 </g>
 </g>
 <g id="even2" clip-path="url(#clip2_9_75)">
@@ -75,22 +72,22 @@
 <g id="117">
 <rect id="m117" x="769.5" y="0.5" width="43" height="58" fill="#A5A5A5" stroke="black"/>
 <rect id="b117" x="812.5" y="0.5" width="53" height="99" fill="#A5A5A5" stroke="black"/>
-<rect id="unit117" x="770.5" y="1.5" width="96" height="97" stroke="black" stroke-width="3"/>
+<rect id="block117" x="770.5" y="1.5" width="96" height="97" stroke="black" stroke-width="3"/>
 </g>
 <g id="115">
 <rect id="b115" x="865.5" y="0.5" width="54" height="99" fill="#A5A5A5" stroke="black"/>
 <rect id="m115" x="919.5" y="0.5" width="42" height="58" fill="#A5A5A5" stroke="black"/>
-<rect id="unit115" x="866.5" y="1.5" width="96" height="97" stroke="black" stroke-width="3"/>
+<rect id="block115" x="866.5" y="1.5" width="96" height="97" stroke="black" stroke-width="3"/>
 </g>
 <g id="113">
 <rect id="m113" x="962.5" y="0.5" width="42" height="58" fill="#A5A5A5" stroke="black"/>
 <rect id="b113" x="1004.5" y="0.5" width="53" height="99" fill="#A5A5A5" stroke="black"/>
-<rect id="unit113" x="962.5" y="1.5" width="96" height="97" stroke="black" stroke-width="3"/>
+<rect id="block113" x="962.5" y="1.5" width="96" height="97" stroke="black" stroke-width="3"/>
 </g>
 <g id="111">
 <rect id="b111" x="1057.5" y="0.5" width="52.5579" height="99" fill="#A5A5A5" stroke="black"/>
 <rect id="m111" x="1110.05" y="0.5" width="42.4526" height="59" fill="#A5A5A5" stroke="black"/>
-<rect id="unit111" x="1058.5" y="2.5" width="93" height="96" stroke="black" stroke-width="3"/>
+<rect id="block111" x="1058.5" y="2.5" width="93" height="96" stroke="black" stroke-width="3"/>
 </g>
 <rect id="service" x="1197.5" y="0.5" width="42" height="99" fill="#D9D9D9" stroke="black"/>
 <rect id="komenda" x="1240.5" y="0.5" width="56" height="99" fill="#D9D9D9" stroke="black"/>
@@ -104,7 +101,7 @@
 <g id="101">
 <rect id="m101(1)" x="1.5" y="129.5" width="56" height="60" fill="#A5A5A5" stroke="black"/>
 <rect id="m101(2)" x="57.5" y="129.5" width="43" height="60" fill="#A5A5A5" stroke="black"/>
-<rect id="unit101" x="2.5" y="130.5" width="97" height="95" stroke="black" stroke-width="3"/>
+<rect id="block101" x="2.5" y="130.5" width="97" height="95" stroke="black" stroke-width="3"/>
 </g>
 <g id="stairs_3">
 <rect id="stairs_4" x="101.5" y="129.5" width="43" height="98" fill="#D9D9D9" stroke="black"/>
@@ -113,25 +110,26 @@
 <g id="103">
 <rect id="m103" x="144.5" y="129.5" width="43" height="57" fill="#A5A5A5" stroke="black"/>
 <rect id="b103" x="187.5" y="129.5" width="53" height="98" fill="#A5A5A5" stroke="black"/>
-<rect id="unit103" x="145.5" y="130.5" width="95" height="95" stroke="black" stroke-width="3"/>
+<rect id="block103" x="145.5" y="130.5" width="95" height="95" stroke="black" stroke-width="3"/>
 </g>
 <g id="105">
-<rect id="b105" x="241.5" y="129.5" width="53" height="98" fill="#A5A5A5" stroke="black"/>
-<rect id="m105" x="294.5" y="129.5" width="42" height="57" fill="#A5A5A5" stroke="black"/>
-<rect id="unit105" x="240.5" y="130.5" width="95" height="95" stroke="black" stroke-width="3"/>
+<rect id="105b" x="241.5" y="129.5" width="53" height="98" fill="#A5A5A5" stroke="black"/>
+<rect id="105m" x="294.5" y="129.5" width="42" height="57" fill="#A5A5A5" stroke="black"/>
+<rect id="block105" x="240.5" y="130.5" width="95" height="95" stroke="black" stroke-width="3"/>
 </g>
 <g id="107">
 <rect id="m107" x="336.5" y="129.5" width="44" height="57" fill="#A5A5A5" stroke="black"/>
 <rect id="b107" x="380.5" y="129.5" width="52" height="98" fill="#A5A5A5" stroke="black"/>
-<rect id="unit107" x="335.5" y="130.5" width="96" height="95" stroke="black" stroke-width="3"/>
+<rect id="block107" x="335.5" y="130.5" width="96" height="95" stroke="black" stroke-width="3"/>
 </g>
 <g id="109">
 <rect id="b109" x="432.52" y="129.5" width="52.5408" height="98" fill="#A5A5A5" stroke="black"/>
 <rect id="m109" x="485.051" y="129.5" width="43.449" height="57" fill="#A5A5A5" stroke="black"/>
-<rect id="unit109" x="431.5" y="130.5" width="94.9898" height="95" stroke="black" stroke-width="3"/>
+<rect id="block109" x="431.5" y="130.5" width="94.9898" height="95" stroke="black" stroke-width="3"/>
 </g>
 <rect id="kamera hran" x="528.5" y="129.5" width="45" height="97" fill="#D9D9D9" stroke="black"/>
 </g>
+<rect id="block117_2" x="916.5" y="132.5" width="42" height="92" stroke="black" stroke-width="3"/>
 </g>
 <defs>
 <clipPath id="clip0_9_75">

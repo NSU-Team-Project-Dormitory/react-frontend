@@ -1,3 +1,31 @@
+.room {
+  position: absolute;
+  width: 69px;
+  height: 69px;
+  background-color: rgba(82, 215, 202, 0.7);
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.room-info {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.close-button {
+  cursor: pointer;
+  color: rgb(82, 82, 82);
+  font-size: 20px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
 .App {
   text-align: center;
   display: flex;
@@ -25,7 +53,7 @@
 }
 
 .App-header {
-  background-color: #122344;
+  background-color: #c9c9c9;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
