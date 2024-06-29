@@ -12,33 +12,45 @@ const Rooms = () => {
   const [popupData, setPopupData] = useState(null);
   const svgContainerRef = useRef(null);
   const [uploadedFloors, setUploadedFloors] = useState({});
+  const [uploadedImages, setUploadedImages] = useState({});
   const fileInputRef = useRef(null);
+  const imageInputRef = useRef(null);
   const [roomNames, setRoomNames] = useState({});
   const [filters, setFilters] = useState({
     smallRoom: false,
     largeRoom: false,
   });
+  const [svgOpacity, setSvgOpacity] = useState(100);
+  const [isResizing, setIsResizing] = useState(false);
+  const [size, setSize] = useState({ width: '100%', height: '100%' });
+  const [resizeCorner, setResizeCorner] = useState(null);
+  const [startResize, setStartResize] = useState({ x: 0, y: 0, width: 0, height: 0 });
 
   useEffect(() => {
-    const floorPlans = [
-      'floor1.svg',
-      'floor2.svg',
-      'floor3.svg',
-    ];
+    const floorPlans = ['floor1.svg', 'floor2.svg', 'floor3.svg'];
     setFloors(floorPlans);
   }, []);
+
+  useEffect(() => {
+    if (svgContainerRef.current) {
+      svgContainerRef.current.style.opacity = svgOpacity / 100;
+    }
+  }, [svgOpacity]);
 
   useEffect(() => {
     if (selectedFloor) {
       if (uploadedFloors[selectedFloor]) {
         setSvgContent(uploadedFloors[selectedFloor]);
       } else {
-        fetch(`${process.env.PUBLIC_URL}/plans/${selectedFloor}`)
-          .then(response => response.text())
-          .then(data => setSvgContent(data));
+        let extension = selectedFloor.split('.').pop();
+        if (extension === 'svg') {
+          fetch(`${process.env.PUBLIC_URL}/plans/${selectedFloor}`)
+            .then((response) => response.text())
+            .then((data) => {
+              setSvgContent(data);
+            });
+        }
       }
-    } else {
-      setSvgContent('<div style="text-align: center; margin-top: 50px;">Выберите планировку</div>');
     }
   }, [selectedFloor, uploadedFloors]);
 
@@ -49,19 +61,19 @@ const Rooms = () => {
 
     let modifiedSvg = svgContent;
     if (filters.smallRoom) {
-        modifiedSvg = colorizeRect(modifiedSvg, 'rect[id^="m"]', 'yellow');
+      modifiedSvg = colorizeRect(modifiedSvg, 'rect[id^="m"]', 'yellow');
     } else {
-        modifiedSvg = colorizeRect(modifiedSvg, 'rect[id^="m"]', '#A5A5A5');
+      modifiedSvg = colorizeRect(modifiedSvg, 'rect[id^="m"]', '#A5A5A5');
     }
 
     if (filters.largeRoom) {
-        modifiedSvg = colorizeRect(modifiedSvg, 'rect[id^="b"]', 'pink');
+      modifiedSvg = colorizeRect(modifiedSvg, 'rect[id^="b"]', 'pink');
     } else {
-        modifiedSvg = colorizeRect(modifiedSvg, 'rect[id^="b"]', '#A5A5A5');
+      modifiedSvg = colorizeRect(modifiedSvg, 'rect[id^="b"]', '#A5A5A5');
     }
 
     setSvgContent(modifiedSvg);
-}, [svgContent, filters]);
+  }, [svgContent, filters]);
 
   const handleRoomClick = (event) => {
     const rectElement = event.target.closest('rect');
@@ -93,6 +105,10 @@ const Rooms = () => {
 
   const handleAddFloor = () => {
     fileInputRef.current.click();
+  };
+
+  const handleAddImage = () => {
+    imageInputRef.current.click();
   };
 
   const handleFileChange = (event) => {
@@ -161,11 +177,101 @@ const Rooms = () => {
     }
   };
 
+  const handleSvgOpacityChange = (event) => {
+    const newOpacity = Number(event.target.value);
+    setSvgOpacity(newOpacity);
+    if (svgContainerRef.current) {
+      svgContainerRef.current.style.opacity = newOpacity / 100;
+    }
+  };
+
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file && file.type.includes('image/png')) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setUploadedImages(prevUploadedImages => ({
+          ...prevUploadedImages,
+          [selectedFloor]: e.target.result,
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleResizeMouseDown = (corner) => (event) => {
+    setIsResizing(true);
+    setResizeCorner(corner);
+    const containerRect = svgContainerRef.current.getBoundingClientRect();
+    setStartResize({
+      x: event.clientX,
+      y: event.clientY,
+      width: containerRect.width,
+      height: containerRect.height,
+    });
+  };
+
+  const handleResizeMouseUp = () => {
+    setIsResizing(false);
+    setResizeCorner(null);
+  };
+
+  const handleResizeMouseMove = (event) => {
+    if (isResizing && resizeCorner) {
+      const startX = startResize.x;
+      const startY = startResize.y;
+      const startWidth = startResize.width;
+      const startHeight = startResize.height;
+
+      let newWidth, newHeight;
+
+      if (resizeCorner === 'se') {
+        newWidth = `${startWidth + (event.clientX - startX)}px`;
+        newHeight = `${startHeight + (event.clientY - startY)}px`;
+      } else if (resizeCorner === 'sw') {
+        newWidth = `${startWidth - (event.clientX - startX)}px`;
+        newHeight = `${startHeight + (event.clientY - startY)}px`;
+      } else if (resizeCorner === 'ne') {
+        newWidth = `${startWidth + (event.clientX - startX)}px`;
+        newHeight = `${startHeight - (event.clientY - startY)}px`;
+      } else if (resizeCorner === 'nw') {
+        newWidth = `${startWidth - (event.clientX - startX)}px`;
+        newHeight = `${startHeight - (event.clientY - startY)}px`;
+      }
+
+      setSize({ width: newWidth, height: newHeight });
+    }
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      const containerRect = svgContainerRef.current.getBoundingClientRect();
+      const { clientWidth, clientHeight } = document.documentElement;
+
+      let newWidth = containerRect.width;
+      let newHeight = containerRect.height;
+
+      if (containerRect.right > clientWidth) {
+        newWidth -= containerRect.right - clientWidth;
+      }
+
+      if (containerRect.bottom > clientHeight) {
+        newHeight -= containerRect.bottom - clientHeight;
+      }
+
+      setSize({ width: `${newWidth}px`, height: `${newHeight}px` });
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <div className="App">
+    <div className="App" onMouseMove={handleResizeMouseMove} onMouseUp={handleResizeMouseUp}>
       <div className="sidebar">
         <FloorList floors={floors} onSelectFloor={setSelectedFloor} />
         <button onClick={handleAddFloor}>Добавить планировку</button>
+        <button onClick={handleAddImage}>Добавить PNG</button>
         <input
           type="file"
           ref={fileInputRef}
@@ -173,15 +279,54 @@ const Rooms = () => {
           onChange={handleFileChange}
           accept=".svg"
         />
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={svgOpacity}
+          onChange={handleSvgOpacityChange}
+        />
+        <input
+          type="file"
+          accept="image/png"
+          ref={imageInputRef}
+          style={{ display: 'none' }}
+          onChange={handleImageUpload}
+        />
         <CheckboxList onChange={handleCheckboxChange} />
       </div>
       <div className="main-content">
-        <header
-          className="App-header"
-          ref={svgContainerRef}
-          onClick={handleRoomClick}
-          dangerouslySetInnerHTML={{ __html: svgContent }}
-        />
+        <div className="image-container" style={{ position: 'relative', width: '100%', height: '100%', background: 'grey' }}>
+          {uploadedImages[selectedFloor] && (
+            <img
+              src={uploadedImages[selectedFloor]}
+              alt="overlay"
+              style={{ position: 'absolute', width: size.width, height: size.height, top: 0, left: 0 }}
+            />
+          )}
+          <div
+            className="svg-container"
+            ref={svgContainerRef}
+            onClick={handleRoomClick}
+            style={{ position: 'absolute', width: size.width, height: size.height, overflow: 'hidden' }}
+            dangerouslySetInnerHTML={{ __html: svgContent }}
+          />
+          {['se', 'sw', 'ne', 'nw'].map(corner => (
+            <div
+              key={corner}
+              style={{
+                position: 'absolute',
+                width: '20px',
+                height: '20px',
+                background: 'red',
+                cursor: `${corner}-resize`,
+                [corner.split('')[0]]: 0,
+                [corner.split('')[1]]: 0,
+              }}
+              onMouseDown={handleResizeMouseDown(corner)}
+            />
+          ))}
+        </div>
         {popupData && (
           <Popup
             rectId={popupData.rectId}

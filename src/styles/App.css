@@ -94,3 +94,11 @@
 .floor-list li:hover {
   background-color: #f0f0f0;
 }
+
+.main-content {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
