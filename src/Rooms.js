@@ -345,14 +345,14 @@ const Rooms = () => {
         />
         <CheckboxList onChange={handleCheckboxChange} />
         <div>
-          <button onClick={handleIncreaseWidth}>Increase PNG size</button>
-          <button onClick={handleDecreaseWidth}>Decrease PNG size</button>
+          <button onClick={handleIncreaseWidth}>Увеличить размер PNG</button>
+          <button onClick={handleDecreaseWidth}>Уменьшить размер PNG</button>
 
-          <button onClick={handleResetSize}>Reset PNG Size</button>
+          <button onClick={handleResetSize}>Сбросить размер PNG</button>
         </div>
         <div>
           <button onMouseDown={handleDragStart} onMouseUp={handleDragEnd}>
-            Move PNG
+            Сдвинуть PNG
           </button>
         </div>
         <div>
@@ -361,7 +361,7 @@ const Rooms = () => {
             checked={isPngVisible}
             onChange={handlePngVisibilityChange}
           />
-          <label>{isPngVisible ? 'Hide PNG' : 'Show PNG'}</label>
+          <label>{isPngVisible ? 'Спрятать PNG' : 'Показать PNG'}</label>
         </div>
       </div>
       <div className="main-content">

@@ -20,11 +20,7 @@ const Popup = ({ rectId, position, residents, rectName, onClose, onSave }) => {
   useEffect(() => {
     setName(rectName || rectId);
   }, [rectId, rectName]);
-
-  useEffect(() => {
-    console.log('Selected Room in Popup:', selectedRoom);
-  }, [selectedRoom]);
-
+  
   const handleSave = () => {
     onSave(rectId, name);
     setMessage('Название комнаты успешно изменено');
@@ -53,7 +49,7 @@ const Popup = ({ rectId, position, residents, rectName, onClose, onSave }) => {
 
       // const addedResident = await response.json();
       onSave(rectId, newResident);
-      setNewResident({ firstName: '', lastName: '', patronymic: '', roomNumber: rectId});
+      setNewResident({ firstName: '', lastName: '', patronymic: '', roomNumber: ''});
       alert('Failed to add resident');
     } catch (error) {
       console.error('Error adding resident:', error);
@@ -113,7 +109,14 @@ const Popup = ({ rectId, position, residents, rectName, onClose, onSave }) => {
                   value={newResident.patronymic}
                   onChange={handleInputChange}
               />
-              <button onClick={addResident}>Добавить жильца  </button>
+              <input
+                  type="text"
+                  name="roomNumber"
+                  placeholder="Комната"
+                  value={newResident.roomNumber}
+                  onChange={handleInputChange}
+              />
+              <button onClick={addResident}>Добавить жильца</button>
               <button onClick={() => setIsEditing(true)}>Изменить название</button>
             </>
 
