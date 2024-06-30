@@ -1,48 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import './styles/Popup.css';
+import React, { useState } from 'react';
 
-const Popup = ({ rectId, rectName, position, onClose, onSave }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState(rectName || rectId);
-  const [message, setMessage] = useState('');
-  const { x, y } = position;
+const Popup = ({ rectId, rectName, position, onClose, onSave, roomData }) => {
+  const [name, setName] = useState(rectName);
 
-  useEffect(() => {
-    setName(rectName || rectId);
-  }, [rectId, rectName]);
-
-  const handleSave = () => {
+  const handleSaveClick = () => {
     onSave(rectId, name);
-    setMessage('Название комнаты успешно изменено');
-    setIsEditing(false);
-  };
-
-  const handlePopupClick = (e) => {
-    e.stopPropagation();
+    onClose();
   };
 
   return (
-    <div className="popup" style={{ top: y, left: x }} onClick={handlePopupClick}>
-      <div className="popup-content">
-        <span className="popup-close" onClick={onClose}>x</span>
-        {message && <p className="success-message">{message}</p>}
-        {isEditing ? (
-          <>
-            <p>Изменить название комнаты:</p>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <button onClick={handleSave}>Сохранить</button>
-          </>
-        ) : (
-          <>
-            <p>{`Комната: ${rectName || rectId}`}</p>
-            <button onClick={() => setIsEditing(true)}>Изменить название</button>
-          </>
-        )}
+    <div
+      className="popup"
+      style={{
+        position: 'absolute',
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        backgroundColor: 'white',
+        border: '1px solid black',
+        padding: '10px',
+        zIndex: 1000,
+      }}
+    >
+      <button onClick={onClose}>Close</button>
+      <div>
+        <label>
+          Room Name:
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
+        <button onClick={handleSaveClick}>Save</button>
       </div>
+      {roomData && (
+        <div>
+          <h3>Room Details</h3>
+          <pre>{JSON.stringify(roomData, null, 2)}</pre>
+        </div>
+      )}
     </div>
   );
 };

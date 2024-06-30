@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 import './styles/App.css';
 import Popup from './Popup';
 import FloorList from './FloorList';
@@ -103,13 +104,21 @@ const Rooms = () => {
       const containerPosition = svgContainerRef.current.getBoundingClientRect();
       const x = rectPosition.left - containerPosition.left + rectPosition.width / 2;
       const y = rectPosition.top - containerPosition.top + rectPosition.height / 2;
-
-      setPopupData({ rectId, position: { x, y } });
+  
+      // Send request to backend
+      axios.post('http://localhost:8080/endpoint', { roomId: rectId }) // Убедитесь, что URL правильный
+        .then(response => {
+          const roomData = response.data;
+          setPopupData({ rectId, position: { x, y }, roomData });
+        })
+        .catch(error => {
+          console.error('There was an error fetching the room data!', error);
+        });
     } else {
       setPopupData(null);
     }
   };
-
+  
   const handleClickOutside = (event) => {
     if (svgContainerRef.current && !svgContainerRef.current.contains(event.target)) {
       setPopupData(null);
@@ -332,6 +341,7 @@ const Rooms = () => {
             position={popupData.position}
             onClose={() => setPopupData(null)}
             onSave={handleSaveRoomName}
+            roomData={popupData.roomData} // Pass roomData to the Popup component
           />
         )}
       </div>
