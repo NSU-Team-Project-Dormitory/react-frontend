@@ -335,26 +335,18 @@ const Rooms = () => {
               }}
             />
           )}
-          <div
-            className="svg-container"
-            ref={svgContainerRef}
-            onClick={handleRoomClick}
-            style={{
-              position: 'absolute',
-              width: '90%',
-              height: '90%',
-            }}
-            dangerouslySetInnerHTML={{ __html: svgContent }}
-          />
+          <div className="svg-container" ref={svgContainerRef} dangerouslySetInnerHTML={{__html: svgContent}}
+               onClick={handleRoomClick}></div>
+
         </div>
         {popupData && (
-          <Popup
-            rectId={popupData.rectId}
-            rectName={roomNames[popupData.rectId]}
-            position={popupData.position}
-            onClose={() => setPopupData(null)}
-            onSave={handleSaveRoomName}
-          />
+            <Popup
+                rectId={popupData.rectId}
+                position={popupData.position}
+                residents={popupData.residents}
+                onClose={() => setPopupData(null)}
+                onSave={handleSaveRoomName}
+            />
         )}
       </div>
     </div>
