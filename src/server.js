@@ -3,20 +3,19 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 8080; // Порт для backend
+const port = 5000;
 
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/endpoint', (req, res) => {
-  const roomId = req.body.roomId;
-  // Возвращаем тестовые данные
-  res.json({
-    roomId: roomId,
-    roomName: `Room ${roomId}`,
-    capacity: Math.floor(Math.random() * 50) + 10,
-    available: Math.random() > 0.5
-  });
+const rooms = [
+    { id: 'm103', name: 'Room m103', capacity: 1, available: true },
+    { id: 'b103', name: 'Room b103', capacity: 3, available: false },
+    { id: 'b107', name: 'Room b107', capacity: 3, available: true },
+];
+
+app.get('/rooms', (req, res) => {
+  res.json(rooms);
 });
 
 app.listen(port, () => {

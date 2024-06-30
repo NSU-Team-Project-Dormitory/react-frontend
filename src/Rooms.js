@@ -25,9 +25,19 @@ const Rooms = () => {
   const [imageWidth, setImageWidth] = useState(100); // State for PNG image width
   const [imageHeight, setImageHeight] = useState(100); // State for PNG image height
 
+  const [rooms, setRooms] = useState([]);
+
+
   useEffect(() => {
     const floorPlans = ['floor1.svg', 'floor2.svg', 'floor3.svg'];
     setFloors(floorPlans);
+      axios.get('http://localhost:5000/rooms')
+        .then(response => {
+          setRooms(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching rooms data:', error);
+        });
   }, []);
 
   // Handle resizing the PNG image
@@ -99,25 +109,32 @@ const Rooms = () => {
   const handleRoomClick = (event) => {
     const rectElement = event.target.closest('rect');
     if (rectElement) {
-      const rectId = rectElement.id;
+      const rectId1 = rectElement.id;
       const rectPosition = rectElement.getBoundingClientRect();
       const containerPosition = svgContainerRef.current.getBoundingClientRect();
       const x = rectPosition.left - containerPosition.left + rectPosition.width / 2;
       const y = rectPosition.top - containerPosition.top + rectPosition.height / 2;
-  
-      // Send request to backend
-      axios.post('http://localhost:8080/endpoint', { roomId: rectId }) // Убедитесь, что URL правильный
-        .then(response => {
-          const roomData = response.data;
-          setPopupData({ rectId, position: { x, y }, roomData });
-        })
-        .catch(error => {
-          console.error('There was an error fetching the room data!', error);
-        });
+
+      // Log the rectId and rooms array
+      console.log('Clicked rectId:', rectId1);
+      console.log('Rooms array:', rooms);
+
+      const selectedRoom = rooms.find(room => room.id === rectId1);
+      const rectId = selectedRoom;
+
+      console.log('Selected Room:', selectedRoom);
+
+      if (selectedRoom) {
+        console.log('Selected Room:', selectedRoom);
+        setPopupData({ rectId, position: { x, y } });
+      } else {
+        console.warn('Room not found for rectId:', rectId1);
+      }
     } else {
       setPopupData(null);
     }
   };
+  
   
   const handleClickOutside = (event) => {
     if (svgContainerRef.current && !svgContainerRef.current.contains(event.target)) {
