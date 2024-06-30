@@ -52,8 +52,8 @@ const Rooms = () => {
   };
 
   const handleDecreaseWidth = () => {
-    setImageWidth(prevWidth => prevWidth * 0.98);
-    setImageHeight(prevHeight => prevHeight * 0.98); // Simultaneously decrease height
+    setImageWidth(prevWidth => prevWidth * 0.97);
+    setImageHeight(prevHeight => prevHeight * 0.97); // Simultaneously decrease height
   };
 
   const handleIncreaseHeight = () => {
@@ -62,8 +62,8 @@ const Rooms = () => {
   };
 
   const handleDecreaseHeight = () => {
-    setImageHeight(prevHeight => prevHeight * 0.98);
-    setImageWidth(prevWidth => prevWidth * 0.98); // Simultaneously decrease width
+    setImageHeight(prevHeight => prevHeight * 0.97);
+    setImageWidth(prevWidth => prevWidth * 0.97); // Simultaneously decrease width
   };
 
   const handleResetSize = () => {
@@ -211,12 +211,17 @@ const Rooms = () => {
 
     const widthRatio = containerWidth / svgWidth;
     const heightRatio = containerHeight / svgHeight;
-    const scale = Math.min(widthRatio, heightRatio);
+    const scaleFactor = Math.min(widthRatio, heightRatio);
 
-    svgContainerRef.current.style.transform = `scale(${scale})`;
+    const scaledWidth = svgWidth * scaleFactor;
+    const scaledHeight = svgHeight * scaleFactor;
+
+    svgContainerRef.current.style.width = `${scaledWidth}px`;
+    svgContainerRef.current.style.height = `${scaledHeight}px`;
   };
 
-  const handleCheckboxChange = (name, checked) => {
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
     setFilters((prevFilters) => ({
       ...prevFilters,
       [name]: checked,
@@ -308,50 +313,6 @@ const Rooms = () => {
     }
   };
 
-  // Load corresponding PNG when floor is selected
-  useEffect(() => {
-    if (selectedFloor && selectedFloor.includes('floor')) {
-      const pngFileName = selectedFloor.replace('.svg', '.png');
-      fetch(`${process.env.PUBLIC_URL}/plans/${pngFileName}`)
-        .then((response) => response.blob())
-        .then((blob) => {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            const img = new Image();
-            img.onload = () => {
-              const maxWidth = svgContainerRef.current.clientWidth;
-              const maxHeight = svgContainerRef.current.clientHeight;
-
-              let scaleFactor = 1;
-              if (img.width > maxWidth || img.height > maxHeight) {
-                const widthScale = maxWidth / img.width;
-                const heightScale = maxHeight / img.height;
-                scaleFactor = Math.min(widthScale, heightScale);
-              }
-
-              setImageWidth(img.width * scaleFactor);
-              setImageHeight(img.height * scaleFactor);
-
-              // Store the initial values
-              setInitialImageWidth(img.width * scaleFactor);
-              setInitialImageHeight(img.height * scaleFactor);
-              setInitialImagePosition({ top: '50%', left: '50%' });
-
-              setUploadedImages((prevUploadedImages) => ({
-                ...prevUploadedImages,
-                [selectedFloor]: e.target.result,
-              }));
-            };
-            img.src = e.target.result;
-          };
-          reader.readAsDataURL(blob);
-        })
-        .catch((error) => {
-          console.error('Error loading PNG:', error);
-        });
-    }
-  }, [selectedFloor]);
-
   return (
     <div className="App" onMouseMove={handleDrag} onMouseUp={handleDragEnd}>
       <div className="sidebar">
@@ -381,10 +342,9 @@ const Rooms = () => {
         />
         <CheckboxList onChange={handleCheckboxChange} />
         <div>
-          <button onClick={handleIncreaseWidth}>Increase PNG Width</button>
-          <button onClick={handleDecreaseWidth}>Decrease PNG Width</button>
-          <button onClick={handleIncreaseHeight}>Increase PNG Height</button>
-          <button onClick={handleDecreaseHeight}>Decrease PNG Height</button>
+          <button onClick={handleIncreaseWidth}>Increase PNG size</button>
+          <button onClick={handleDecreaseWidth}>Decrease PNG size</button>
+
           <button onClick={handleResetSize}>Reset PNG Size</button>
         </div>
         <div>
