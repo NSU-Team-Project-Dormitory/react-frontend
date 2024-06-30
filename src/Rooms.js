@@ -38,20 +38,24 @@ const Rooms = () => {
   // Handle resizing the PNG image
   const handleIncreaseWidth = () => {
     setImageWidth(prevWidth => prevWidth * 1.03);
+    setImageHeight(prevHeight => prevHeight * 1.03); // Simultaneously increase height
   };
 
   const handleDecreaseWidth = () => {
-    setImageWidth(prevWidth => prevWidth * 0.98);
+    setImageWidth(prevWidth => prevWidth * 0.97);
+    setImageHeight(prevHeight => prevHeight * 0.97); // Simultaneously decrease height
   };
 
   const handleIncreaseHeight = () => {
     setImageHeight(prevHeight => prevHeight * 1.03);
+    setImageWidth(prevWidth => prevWidth * 1.03); // Simultaneously increase width
   };
 
   const handleDecreaseHeight = () => {
-    setImageHeight(prevHeight => prevHeight * 0.98);
+    setImageHeight(prevHeight => prevHeight * 0.97);
+    setImageWidth(prevWidth => prevWidth * 0.97); // Simultaneously decrease width
   };
-  
+
   const handleResetSize = () => {
 
     setImageWidth(initialImageWidth);
@@ -228,14 +232,11 @@ const Rooms = () => {
       ...prevRoomNames,
       [rectId]: name,
     }));
-
     const parser = new DOMParser();
     const doc = parser.parseFromString(svgContent, 'image/svg+xml');
     const roomElement = doc.getElementById(rectId);
-
     if (roomElement) {
-      roomElement.setAttribute('data-name', name);
-      const titleElement = doc.createElementNS(doc.documentElement.namespaceURI, 'title');
+      const titleElement = doc.createElementNS('http://www.w3.org/2000/svg', 'title');
       titleElement.textContent = name;
       roomElement.appendChild(titleElement);
 
@@ -344,10 +345,9 @@ const Rooms = () => {
         />
         <CheckboxList onChange={handleCheckboxChange} />
         <div>
-          <button onClick={handleIncreaseWidth}>Increase PNG Width</button>
-          <button onClick={handleDecreaseWidth}>Decrease PNG Width</button>
-          <button onClick={handleIncreaseHeight}>Increase PNG Height</button>
-          <button onClick={handleDecreaseHeight}>Decrease PNG Height</button>
+          <button onClick={handleIncreaseWidth}>Increase PNG size</button>
+          <button onClick={handleDecreaseWidth}>Decrease PNG size</button>
+
           <button onClick={handleResetSize}>Reset PNG Size</button>
         </div>
         <div>
@@ -367,7 +367,7 @@ const Rooms = () => {
       <div className="main-content">
         <div
           className="image-container"
-          style={{ position: 'relative', width: '100%', height: '100%', background: 'grey' }}
+          style={{ position: 'relative', width: '100%', height: '100%', background: 'grey', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
         >
           {isPngVisible && uploadedImages[selectedFloor] && (
             <img
@@ -386,8 +386,22 @@ const Rooms = () => {
               onMouseUp={handleDragEnd}
             />
           )}
-          <div className="svg-container" ref={svgContainerRef} dangerouslySetInnerHTML={{__html: svgContent}}
-               onClick={handleRoomClick}></div>
+
+          <div
+            className="svg-container"
+            ref={svgContainerRef}
+            onClick={handleRoomClick}
+            style={{
+              position: 'absolute',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              transform: 'translate(-50%, -50%)', // Center the SVG
+              top: '50%', 
+              left: '50%',
+            }}
+            dangerouslySetInnerHTML={{ __html: svgContent }}
+          />
 
         </div>
         {popupData && (
