@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 import './styles/App.css';
 import Popup from './Popup';
 import FloorList from './FloorList';
@@ -29,9 +30,19 @@ const Rooms = () => {
   const [imagePosition, setImagePosition] = useState({ top: '50%', left: '50%' }); // State for PNG position
   const [initialImagePosition, setInitialImagePosition] = useState({ top: '50%', left: '50%' }); // State for initial PNG position
 
+  const [rooms, setRooms] = useState([]);
+
+
   useEffect(() => {
     const floorPlans = ['floor1.svg', 'floor2.svg', 'floor3.svg'];
     setFloors(floorPlans);
+      axios.get('http://localhost:5000/rooms')
+        .then(response => {
+          setRooms(response.data);
+        })
+        .catch(error => {
+          console.error('Error fetching rooms data:', error);
+        });
   }, []);
 
   // Handle resizing the PNG image
@@ -104,18 +115,33 @@ const Rooms = () => {
   const handleRoomClick = (event) => {
     const rectElement = event.target.closest('rect');
     if (rectElement) {
-      const rectId = rectElement.id;
+      const rectId1 = rectElement.id;
       const rectPosition = rectElement.getBoundingClientRect();
       const containerPosition = svgContainerRef.current.getBoundingClientRect();
       const x = rectPosition.left - containerPosition.left + rectPosition.width / 2;
       const y = rectPosition.top - containerPosition.top + rectPosition.height / 2;
 
-      setPopupData({ rectId, position: { x, y } });
+      // Log the rectId and rooms array
+      console.log('Clicked rectId:', rectId1);
+      console.log('Rooms array:', rooms);
+
+      const selectedRoom = rooms.find(room => room.id === rectId1);
+      const rectId = selectedRoom;
+
+      console.log('Selected Room:', selectedRoom);
+
+      if (selectedRoom) {
+        console.log('Selected Room:', selectedRoom);
+        setPopupData({ rectId, position: { x, y } });
+      } else {
+        console.warn('Room not found for rectId:', rectId1);
+      }
     } else {
       setPopupData(null);
     }
   };
-
+  
+  
   const handleClickOutside = (event) => {
     if (svgContainerRef.current && !svgContainerRef.current.contains(event.target)) {
       setPopupData(null);
@@ -368,6 +394,7 @@ const Rooms = () => {
             position={popupData.position}
             onClose={() => setPopupData(null)}
             onSave={handleSaveRoomName}
+            roomData={popupData.roomData} // Pass roomData to the Popup component
           />
         )}
       </div>

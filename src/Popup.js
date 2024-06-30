@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './styles/Popup.css';
 
-const Popup = ({ rectId, rectName, position, onClose, onSave }) => {
+const Popup = ({capacity, rectId, selectedRoom,  rectName, position, onClose, onSave,   }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(rectName || rectId);
   const [message, setMessage] = useState('');
   const { x, y } = position;
+  const [room, setRoom] = useState(selectedRoom || '')
 
   useEffect(() => {
     setName(rectName || rectId);
   }, [rectId, rectName]);
+
+  useEffect(() => {
+    console.log('Selected Room in Popup:', selectedRoom);
+  }, [selectedRoom]);
 
   const handleSave = () => {
     onSave(rectId, name);
@@ -20,6 +25,8 @@ const Popup = ({ rectId, rectName, position, onClose, onSave }) => {
   const handlePopupClick = (e) => {
     e.stopPropagation();
   };
+
+
 
   return (
     <div className="popup" style={{ top: y, left: x }} onClick={handlePopupClick}>
@@ -38,7 +45,10 @@ const Popup = ({ rectId, rectName, position, onClose, onSave }) => {
           </>
         ) : (
           <>
-            <p>{`Комната: ${rectName || rectId}`}</p>
+            <p>{`Комната: ${rectName || rectId.id}`}</p>
+            
+            <p>{`Вместимость: ${rectId.capacity}`}</p>
+            <p>{`Доступность: ${rectId.available}`}</p>
             <button onClick={() => setIsEditing(true)}>Изменить название</button>
           </>
         )}
