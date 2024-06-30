@@ -48,20 +48,24 @@ const Rooms = () => {
   // Handle resizing the PNG image
   const handleIncreaseWidth = () => {
     setImageWidth(prevWidth => prevWidth * 1.03);
+    setImageHeight(prevHeight => prevHeight * 1.03); // Simultaneously increase height
   };
 
   const handleDecreaseWidth = () => {
     setImageWidth(prevWidth => prevWidth * 0.98);
+    setImageHeight(prevHeight => prevHeight * 0.98); // Simultaneously decrease height
   };
 
   const handleIncreaseHeight = () => {
     setImageHeight(prevHeight => prevHeight * 1.03);
+    setImageWidth(prevWidth => prevWidth * 1.03); // Simultaneously increase width
   };
 
   const handleDecreaseHeight = () => {
     setImageHeight(prevHeight => prevHeight * 0.98);
+    setImageWidth(prevWidth => prevWidth * 0.98); // Simultaneously decrease width
   };
-  
+
   const handleResetSize = () => {
     setImageWidth(initialImageWidth);
     setImageHeight(initialImageHeight);
@@ -207,17 +211,12 @@ const Rooms = () => {
 
     const widthRatio = containerWidth / svgWidth;
     const heightRatio = containerHeight / svgHeight;
-    const scaleFactor = Math.min(widthRatio, heightRatio);
+    const scale = Math.min(widthRatio, heightRatio);
 
-    const scaledWidth = svgWidth * scaleFactor;
-    const scaledHeight = svgHeight * scaleFactor;
-
-    svgContainerRef.current.style.width = `${scaledWidth}px`;
-    svgContainerRef.current.style.height = `${scaledHeight}px`;
+    svgContainerRef.current.style.transform = `scale(${scale})`;
   };
 
-  const handleCheckboxChange = (event) => {
-    const { name, checked } = event.target;
+  const handleCheckboxChange = (name, checked) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
       [name]: checked,
@@ -229,14 +228,11 @@ const Rooms = () => {
       ...prevRoomNames,
       [rectId]: name,
     }));
-
     const parser = new DOMParser();
     const doc = parser.parseFromString(svgContent, 'image/svg+xml');
     const roomElement = doc.getElementById(rectId);
-
     if (roomElement) {
-      roomElement.setAttribute('data-name', name);
-      const titleElement = doc.createElementNS(doc.documentElement.namespaceURI, 'title');
+      const titleElement = doc.createElementNS('http://www.w3.org/2000/svg', 'title');
       titleElement.textContent = name;
       roomElement.appendChild(titleElement);
 
@@ -312,6 +308,50 @@ const Rooms = () => {
     }
   };
 
+  // Load corresponding PNG when floor is selected
+  useEffect(() => {
+    if (selectedFloor && selectedFloor.includes('floor')) {
+      const pngFileName = selectedFloor.replace('.svg', '.png');
+      fetch(`${process.env.PUBLIC_URL}/plans/${pngFileName}`)
+        .then((response) => response.blob())
+        .then((blob) => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+              const maxWidth = svgContainerRef.current.clientWidth;
+              const maxHeight = svgContainerRef.current.clientHeight;
+
+              let scaleFactor = 1;
+              if (img.width > maxWidth || img.height > maxHeight) {
+                const widthScale = maxWidth / img.width;
+                const heightScale = maxHeight / img.height;
+                scaleFactor = Math.min(widthScale, heightScale);
+              }
+
+              setImageWidth(img.width * scaleFactor);
+              setImageHeight(img.height * scaleFactor);
+
+              // Store the initial values
+              setInitialImageWidth(img.width * scaleFactor);
+              setInitialImageHeight(img.height * scaleFactor);
+              setInitialImagePosition({ top: '50%', left: '50%' });
+
+              setUploadedImages((prevUploadedImages) => ({
+                ...prevUploadedImages,
+                [selectedFloor]: e.target.result,
+              }));
+            };
+            img.src = e.target.result;
+          };
+          reader.readAsDataURL(blob);
+        })
+        .catch((error) => {
+          console.error('Error loading PNG:', error);
+        });
+    }
+  }, [selectedFloor]);
+
   return (
     <div className="App" onMouseMove={handleDrag} onMouseUp={handleDragEnd}>
       <div className="sidebar">
@@ -356,7 +396,7 @@ const Rooms = () => {
       <div className="main-content">
         <div
           className="image-container"
-          style={{ position: 'relative', width: '100%', height: '100%', background: 'grey' }}
+          style={{ position: 'relative', width: '100%', height: '100%', background: 'grey', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
         >
           {uploadedImages[selectedFloor] && (
             <img
@@ -381,8 +421,12 @@ const Rooms = () => {
             onClick={handleRoomClick}
             style={{
               position: 'absolute',
-              width: '100%',
-              height: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              transform: 'translate(-50%, -50%)', // Center the SVG
+              top: '50%', 
+              left: '50%',
             }}
             dangerouslySetInnerHTML={{ __html: svgContent }}
           />
