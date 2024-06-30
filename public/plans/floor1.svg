@@ -1,150 +1,150 @@
-<svg width="1297" height="564" viewBox="0 0 1297 564" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="1100" height="691" viewBox="0 0 1100 691" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="Floor1">
-<rect id="zal" x="625.5" y="268.5" width="217" height="295" fill="#D9D9D9" stroke="black"/>
-<rect id="storage" x="573.5" y="129.5" width="107" height="98" fill="#D9D9D9" stroke="black"/>
-<rect id="wc" x="680.5" y="130.5" width="45" height="97" fill="#D9D9D9" stroke="black"/>
-<rect id="coridor4" x="625.5" y="99.5" width="671" height="31" fill="#D9D9D9" stroke="black"/>
-<rect id="coridor3" x="725.5" y="130.5" width="41" height="97" fill="#D9D9D9" stroke="black"/>
-<rect id="coridor2" x="625.5" y="226.5" width="217" height="42" fill="#D9D9D9" stroke="black"/>
-<rect id="coridor1" x="1.5" y="226.5" width="624" height="28" fill="#D9D9D9" stroke="black"/>
+<rect id="zal" x="501.5" y="425.5" width="164" height="265" fill="#D9D9D9" stroke="black"/>
+<rect id="coridor4" x="496.5" y="325.5" width="529" height="23" fill="#D9D9D9" stroke="black"/>
+<rect id="coridor1" x="4.5" y="426.5" width="497" height="21" fill="#D9D9D9" stroke="black"/>
 <g id="odd2">
 <g clip-path="url(#clip0_9_75)">
-<rect x="766" y="130" width="531" height="97" fill="white"/>
+<rect x="455" y="348" width="571" height="78" fill="white"/>
+<rect id="kvant" x="643.5" y="347.5" width="83" height="78" fill="#D9D9D9" stroke="black"/>
 <g id="114">
-<rect id="m114" x="1195.5" y="168.112" width="44" height="58.3878" fill="#A5A5A5" stroke="black"/>
-<rect id="b114" x="1239.5" y="130.5" width="56" height="96" fill="#A5A5A5" stroke="black"/>
-<rect id="union114" x="1195.5" y="131.5" width="99" height="94" stroke="black" stroke-width="3"/>
+<rect id="m114" x="947.284" y="378.745" width="34.2941" height="46.7551" fill="#A5A5A5" stroke="black"/>
+<rect id="b114" x="981.794" y="348.5" width="43.7059" height="77" fill="#A5A5A5" stroke="black"/>
+<rect id="union114" x="947.5" y="349.5" width="77" height="75" stroke="black" stroke-width="3"/>
 </g>
 <g id="kitchen">
-<path id="Vector 1" d="M1152 167H1167M1167 167H1177V155H1172M1167 167V155H1172M1172 155V159.5V151" stroke="black"/>
-<rect id="kitchen_2" x="1151.5" y="130.5" width="43" height="97" fill="#D9D9D9" stroke="black"/>
+<path id="Vector 1" d="M912.795 377.449H924.727M924.727 377.449H932.682V367.898H928.705M924.727 377.449V367.898H928.705M928.705 367.898V371.48V364.714" stroke="black"/>
+<rect id="kitchen_2" x="912.5" y="348.5" width="34" height="77" fill="#D9D9D9" stroke="black"/>
 </g>
 <g id="112">
-<rect id="m112" x="1107.5" y="168.112" width="44" height="58.3878" fill="#A5A5A5" stroke="black"/>
-<rect id="b112" x="1056.5" y="130.5" width="51" height="96" fill="#A5A5A5" stroke="black"/>
-<rect id="unit112" x="1057.5" y="131.5" width="94.9898" height="94" stroke="black" stroke-width="3"/>
+<rect id="m112" x="876.5" y="379.5" width="34" height="46" fill="#A5A5A5" stroke="black"/>
+<rect id="b112" x="836.5" y="348.5" width="40" height="77" fill="#A5A5A5" stroke="black"/>
+<rect id="unit112" x="837.5" y="349.5" width="74" height="75" stroke="black" stroke-width="3"/>
 </g>
-<rect id="enter" x="1003.5" y="130.5" width="53" height="97" fill="#D9D9D9" stroke="black"/>
-<rect id="vahta" x="960.5" y="130.5" width="43" height="97" fill="#D9D9D9" stroke="black"/>
-<rect id="kvant" x="765.5" y="130.5" width="150" height="97" fill="#D9D9D9" stroke="black"/>
+<rect id="enter" x="794.5" y="348.5" width="42" height="77" fill="#D9D9D9" stroke="black"/>
+<rect id="vahta" x="760.5" y="348.5" width="34" height="77" fill="#D9D9D9" stroke="black"/>
 <g id="110">
-<rect id="m110" x="915.5" y="168.5" width="45" height="59" fill="#A5A5A5" stroke="black"/>
-<rect id="unit110" x="916.5" y="132.5" width="42" height="92" stroke="black" stroke-width="3"/>
+<rect id="m110" x="727.5" y="378.5" width="32" height="45" fill="#A5A5A5" stroke="black"/>
+<rect id="unit110" x="728.5" y="349.5" width="30" height="75" stroke="black" stroke-width="3"/>
 </g>
+<rect id="coridor2" x="573.5" y="348.5" width="35" height="77" fill="#D9D9D9" stroke="black"/>
+<rect id="storage" x="455.5" y="348.5" width="86" height="77" fill="#D9D9D9" stroke="black"/>
+<rect id="coridor3" x="608.5" y="346.5" width="35" height="80" fill="#D9D9D9" stroke="black"/>
 </g>
-<rect x="766.5" y="130.5" width="530" height="96" stroke="black"/>
+<rect x="455.5" y="348.5" width="570" height="77" stroke="black"/>
 </g>
 <g id="odd1" clip-path="url(#clip1_9_75)">
-<rect width="624" height="100" transform="translate(1 254)" fill="white"/>
-<rect id="unknown1" x="573.5" y="254.5" width="52" height="99" fill="#D9D9D9" stroke="black"/>
-<g id="kitchen_3">
-<rect id="kitchen_4" x="529.5" y="254.5" width="44" height="99" fill="#D9D9D9" stroke="black"/>
-<path id="Vector 1_2" d="M529.5 295H544.5M544.5 295H554.5V283H549.5M544.5 295V283H549.5M549.5 283V287.5V279" stroke="black"/>
+<rect width="497" height="78" transform="translate(4 448)" fill="white"/>
+<g id="100">
+<rect id="m100(4)" x="114.332" y="481.26" width="37.1684" height="44.24" fill="#A5A5A5" stroke="black"/>
+<rect id="m100(3)" x="81.6158" y="481.26" width="32.4947" height="44.24" fill="#A5A5A5" stroke="black"/>
+<rect id="m100(2)" x="48.9" y="481.26" width="32.4947" height="44.24" fill="#A5A5A5" stroke="black"/>
+<rect id="m100(1)" x="4.5" y="481.26" width="44.1789" height="44.24" fill="#A5A5A5" stroke="black"/>
+<rect id="unit100" x="5.5" y="449.5" width="145" height="75" stroke="black" stroke-width="3"/>
 </g>
-<g id="106">
-<rect id="m106" x="485.5" y="296.5" width="44" height="57" fill="#A5A5A5" stroke="black"/>
-<rect id="b106" x="434.5" y="254.5" width="51" height="99" fill="#A5A5A5" stroke="black"/>
-<rect id="unit106" x="434.5" y="255.5" width="94" height="97" stroke="black" stroke-width="3"/>
+<rect id="unknow" x="151.5" y="448.5" width="41" height="77" fill="#D9D9D9" stroke="black"/>
+<g id="102">
+<rect id="b102" x="192.5" y="448.5" width="41.1837" height="77" fill="#A5A5A5" stroke="black"/>
+<rect id="m102" x="233.888" y="481.26" width="35.6122" height="44.24" fill="#A5A5A5" stroke="black"/>
+<rect id="unit102" x="193.5" y="449.5" width="75" height="75" stroke="black" stroke-width="3"/>
 </g>
 <g id="104">
-<rect id="b104" x="382.5" y="254.5" width="51" height="99" fill="#A5A5A5" stroke="black"/>
-<rect id="m104" x="338.5" y="296.5" width="44" height="57" fill="#A5A5A5" stroke="black"/>
-<rect id="unit104" x="337.5" y="255.5" width="97" height="97" stroke="black" stroke-width="3"/>
+<rect id="b104" x="303.38" y="448.5" width="39.56" height="77" fill="#A5A5A5" stroke="black"/>
+<rect id="m104" x="269.06" y="481.26" width="34.1" height="44.24" fill="#A5A5A5" stroke="black"/>
+<rect id="unit104" x="268.5" y="449.5" width="75" height="75" stroke="black" stroke-width="3"/>
 </g>
-<rect id="unknow" x="190.5" y="254.5" width="51" height="99" fill="#D9D9D9" stroke="black"/>
-<g id="102">
-<rect id="b102" x="241.5" y="254.5" width="52" height="99" fill="#A5A5A5" stroke="black"/>
-<rect id="m102" x="293.5" y="296.5" width="45" height="57" fill="#A5A5A5" stroke="black"/>
-<rect id="unit102" x="242.5" y="255.5" width="95" height="97" stroke="black" stroke-width="3"/>
+<g id="kitchen_3">
+<rect id="kitchen_4" x="419.5" y="448.5" width="35" height="77" fill="#D9D9D9" stroke="black"/>
+<path id="Vector 1_2" d="M419.4 479.98H431.4M431.4 479.98H439.4V470.62H435.4M431.4 479.98V470.62H435.4M435.4 470.62V474.13V467.5" stroke="black"/>
 </g>
-<g id="100">
-<rect id="m100(4)" x="142.5" y="296.5" width="48" height="57" fill="#A5A5A5" stroke="black"/>
-<rect id="m100(3)" x="100.5" y="296.5" width="42" height="57" fill="#A5A5A5" stroke="black"/>
-<rect id="m100(2)" x="58.5" y="296.5" width="42" height="57" fill="#A5A5A5" stroke="black"/>
-<rect id="m100(1)" x="1.5" y="296.5" width="57" height="57" fill="#A5A5A5" stroke="black"/>
-<rect id="unit100" x="2.5" y="255.5" width="187" height="97" stroke="black" stroke-width="3"/>
+<rect id="unknown1" x="453.5" y="448.5" width="48" height="77" fill="#D9D9D9" stroke="black"/>
+<g id="106">
+<rect id="m106" x="384.314" y="481.26" width="35.1856" height="44.24" fill="#A5A5A5" stroke="black"/>
+<rect id="b106" x="343.304" y="448.5" width="40.8144" height="77" fill="#A5A5A5" stroke="black"/>
+<rect id="unit106" x="343.5" y="449.5" width="75" height="75" stroke="black" stroke-width="3"/>
 </g>
 </g>
 <g id="even2" clip-path="url(#clip2_9_75)">
-<rect width="672" height="100" transform="translate(625)" fill="white"/>
-<rect id="kastellana" x="625.5" y="0.5" width="99" height="99" fill="#D9D9D9" stroke="black"/>
+<rect width="530" height="79" transform="translate(496 247)" fill="white"/>
+<rect id="kastellana" x="496.5" y="247.5" width="77" height="78" fill="#D9D9D9" stroke="black"/>
 <g id="stairs2">
-<rect id="stairs2_2" x="724.5" y="0.5" width="45" height="99" fill="#D9D9D9" stroke="black"/>
-<path id="stairs2_3" d="M724 38H735.744M745.977 73V68M745.977 73H735.744M745.977 73H748.023M724.5 73H735.744M769 73H757.856M745.977 68H724.5M745.977 68V63M745.977 63H724.5M745.977 63V58M745.977 58H725M745.977 58V53M745.977 53H725M745.977 53V48M745.977 48H725M745.977 48V43M745.977 43V38H735.744M745.977 43H724.5M735.744 38V73M735.744 73H748.023M748.023 73V68M748.023 73H757.856M748.023 58L754.578 53M748.023 58H769M748.023 58V63M761.134 48L769 42V48H761.134ZM761.134 48L757.856 50.5M769 53H754.578M754.578 53L757.856 50.5M769 63H748.023M748.023 63V68M769.5 68H748.023M757.856 50.5V73" stroke="black"/>
+<rect id="stairs2_2" x="572.5" y="247.5" width="37.5761" height="78" fill="#D9D9D9" stroke="black"/>
+<path id="stairs2_3" d="M572 277H581.808M590.354 305V301M590.354 305H581.808M590.354 305H592.063M572.418 305H581.808M609.582 305H600.275M590.354 301H572.418M590.354 301V297M590.354 297H572.418M590.354 297V293M590.354 293H572.835M590.354 293V289M590.354 289H572.835M590.354 289V285M590.354 285H572.835M590.354 285V281M590.354 281V277H581.808M590.354 281H572.418M581.808 277V305M581.808 305H592.063M592.063 305V301M592.063 305H600.275M592.063 293L597.538 289M592.063 293H609.582M592.063 293V297M603.013 285L609.582 280.2V285H603.013ZM603.013 285L600.275 287M609.582 289H597.538M597.538 289L600.275 287M609.582 297H592.063M592.063 297V301M610 301H592.063M600.275 287V305" stroke="black"/>
 </g>
 <g id="117">
-<rect id="m117" x="769.5" y="0.5" width="43" height="58" fill="#A5A5A5" stroke="black"/>
-<rect id="b117" x="812.5" y="0.5" width="53" height="99" fill="#A5A5A5" stroke="black"/>
-<rect id="unit117" x="770.5" y="1.5" width="96" height="97" stroke="black" stroke-width="3"/>
+<rect id="m117" x="610.5" y="247.5" width="32.7778" height="46.2" fill="#A5A5A5" stroke="black"/>
+<rect id="b117" x="643.51" y="247.5" width="40.4545" height="79" fill="#A5A5A5" stroke="black"/>
+<rect id="unit117" x="611.5" y="248.5" width="73" height="77" stroke="black" stroke-width="3"/>
 </g>
 <g id="115">
-<rect id="b115" x="865.5" y="0.5" width="54" height="99" fill="#A5A5A5" stroke="black"/>
-<rect id="m115" x="919.5" y="0.5" width="42" height="58" fill="#A5A5A5" stroke="black"/>
-<rect id="unit115" x="866.5" y="1.5" width="96" height="97" stroke="black" stroke-width="3"/>
+<rect id="b115" x="682.5" y="247.5" width="43.4444" height="78" fill="#A5A5A5" stroke="black"/>
+<rect id="m115" x="726.136" y="247.5" width="33.7475" height="45.61" fill="#A5A5A5" stroke="black"/>
+<rect id="unit115" x="683.5" y="248.5" width="77" height="76" stroke="black" stroke-width="3"/>
 </g>
 <g id="113">
-<rect id="m113" x="962.5" y="0.5" width="42" height="58" fill="#A5A5A5" stroke="black"/>
-<rect id="b113" x="1004.5" y="0.5" width="53" height="99" fill="#A5A5A5" stroke="black"/>
-<rect id="unit113" x="962.5" y="1.5" width="96" height="97" stroke="black" stroke-width="3"/>
+<rect id="m113" x="760.288" y="247.5" width="32.8788" height="45.61" fill="#A5A5A5" stroke="black"/>
+<rect id="b113" x="793.379" y="247.5" width="41.5455" height="78" fill="#A5A5A5" stroke="black"/>
+<rect id="unit113" x="760.5" y="248.5" width="75" height="76" stroke="black" stroke-width="3"/>
 </g>
 <g id="111">
-<rect id="b111" x="1057.5" y="0.5" width="52.5579" height="99" fill="#A5A5A5" stroke="black"/>
-<rect id="m111" x="1110.05" y="0.5" width="42.4526" height="59" fill="#A5A5A5" stroke="black"/>
-<rect id="unit111" x="1058.5" y="2.5" width="93" height="96" stroke="black" stroke-width="3"/>
+<rect id="b111" x="834.5" y="247.5" width="43.0737" height="78" fill="#A5A5A5" stroke="black"/>
+<rect id="m111" x="877.742" y="247.5" width="34.7579" height="46.4" fill="#A5A5A5" stroke="black"/>
+<rect id="unit111" x="835.5" y="249.29" width="76" height="75.21" stroke="black" stroke-width="3"/>
 </g>
-<rect id="service" x="1197.5" y="0.5" width="42" height="99" fill="#D9D9D9" stroke="black"/>
-<rect id="komenda" x="1240.5" y="0.5" width="56" height="99" fill="#D9D9D9" stroke="black"/>
 <g id="stairs">
-<rect id="stairs2_4" x="1153.5" y="0.5" width="43" height="99" fill="#D9D9D9" stroke="black"/>
-<path id="stairs_2" d="M1153 39H1164.5M1174.5 74V69M1174.5 74H1164.5M1174.5 74H1176.5M1153.21 74H1164.5M1197 74H1186.11M1174.5 69H1153.21M1174.5 69V64M1174.5 64H1153M1174.5 64V59M1174.5 59H1154M1174.5 59V54M1174.5 54H1154M1174.5 54V49M1174.5 49H1154M1174.5 49V44M1174.5 44V39H1164.5M1174.5 44H1153M1164.5 39V74M1164.5 74H1176.5M1176.5 74V69M1176.5 74H1186.11M1176.5 59L1182.91 54M1176.5 59H1197M1176.5 59V64M1189.31 49L1197 43V49H1189.31ZM1189.31 49L1186.11 51.5M1197 54H1182.91M1182.91 54L1186.11 51.5M1197 64H1176.5M1176.5 64V69M1196.5 69H1176.5M1186.11 51.5V74" stroke="black"/>
+<rect id="stairs2_4" x="912.5" y="247.5" width="33" height="78" fill="#D9D9D9" stroke="black"/>
+<path id="stairs_2" d="M912 277.81H920.886M928.614 305.46V301.51M928.614 305.46H920.886M928.614 305.46H930.159M912.165 305.46H920.886M946 305.46H937.585M928.614 301.51H912.165M928.614 301.51V297.56M928.614 297.56H912M928.614 297.56V293.61M928.614 293.61H912.773M928.614 293.61V289.66M928.614 289.66H912.773M928.614 289.66V285.71M928.614 285.71H912.773M928.614 285.71V281.76M928.614 281.76V277.81H920.886M928.614 281.76H912M920.886 277.81V305.46M920.886 305.46H930.159M930.159 305.46V301.51M930.159 305.46H937.585M930.159 293.61L935.109 289.66M930.159 293.61H946M930.159 293.61V297.56M940.06 285.71L946 280.97V285.71H940.06ZM940.06 285.71L937.585 287.685M946 289.66H935.109M935.109 289.66L937.585 287.685M946 297.56H930.159M930.159 297.56V301.51M945.614 301.51H930.159M937.585 287.685V305.46" stroke="black"/>
 </g>
+<rect id="service" x="945.5" y="247.5" width="36" height="78" fill="#D9D9D9" stroke="black"/>
+<rect id="komenda" x="980.5" y="247.5" width="45" height="78" fill="#D9D9D9" stroke="black"/>
 </g>
 <g id="even1" clip-path="url(#clip3_9_75)">
-<rect width="572" height="98" transform="translate(1 129)" fill="white"/>
+<rect width="451" height="78" transform="translate(4 348)" fill="white"/>
 <g id="101">
-<rect id="m101(1)" x="1.5" y="129.5" width="56" height="60" fill="#A5A5A5" stroke="black"/>
-<rect id="m101(2)" x="57.5" y="129.5" width="43" height="60" fill="#A5A5A5" stroke="black"/>
-<rect id="unit101" x="2.5" y="130.5" width="97" height="95" stroke="black" stroke-width="3"/>
-</g>
-<g id="stairs_3">
-<rect id="stairs_4" x="101.5" y="129.5" width="43" height="98" fill="#D9D9D9" stroke="black"/>
-<path id="stairs_5" d="M102 163H112M122 198V193M122 198H112M122 198H124M102 198H112M144.5 198H133.609M122 193H102M122 193V188M122 188H102M122 188V183M122 183H101.5M122 183V178M122 178H101.5M122 178V173M122 173H101.5M122 173V168M122 168V163H112M122 168H102M112 163V198M112 198H124M124 198V193M124 198H133.609M124 183L130.406 178M124 183H144.5M124 183V188M136.812 173L144.5 167V173H136.812ZM136.812 173L133.609 175.5M144.5 178H130.406M130.406 178L133.609 175.5M144.5 188H124M124 188V193M144 193H124M133.609 175.5V198" stroke="black"/>
+<rect id="m101(1)" x="4.5" y="348.5" width="44.03" height="46.9286" fill="#A5A5A5" stroke="black"/>
+<rect id="m101(2)" x="48.74" y="348.5" width="33.76" height="46.9286" fill="#A5A5A5" stroke="black"/>
+<rect id="unit101" x="5.5" y="349.5" width="76" height="75" stroke="black" stroke-width="3"/>
 </g>
 <g id="103">
-<rect id="m103" x="144.5" y="129.5" width="43" height="57" fill="#A5A5A5" stroke="black"/>
-<rect id="b103" x="187.5" y="129.5" width="53" height="98" fill="#A5A5A5" stroke="black"/>
-<rect id="unit103" x="145.5" y="130.5" width="95" height="95" stroke="black" stroke-width="3"/>
+<rect id="m103" x="115.5" y="348.5" width="34.4694" height="44.697" fill="#A5A5A5" stroke="black"/>
+<rect id="b103" x="150.163" y="348.5" width="42.5306" height="77" fill="#A5A5A5" stroke="black"/>
+<rect id="unit103" x="116.5" y="349.5" width="76" height="75" stroke="black" stroke-width="3"/>
+</g>
+<g id="stairs_3">
+<rect id="stairs_4" x="83.5" y="348.5" width="32" height="77" fill="#D9D9D9" stroke="black"/>
+<path id="stairs_5" d="M83.3837 373H91.0581M98.7326 400V396.143M98.7326 400H91.0581M98.7326 400H100.267M83.3837 400H91.0581M116 400H107.642M98.7326 396.143H83.3837M98.7326 396.143V392.286M98.7326 392.286H83.3837M98.7326 392.286V388.429M98.7326 388.429H83M98.7326 388.429V384.571M98.7326 384.571H83M98.7326 384.571V380.714M98.7326 380.714H83M98.7326 380.714V376.857M98.7326 376.857V373H91.0581M98.7326 376.857H83.3837M91.0581 373V400M91.0581 400H100.267M100.267 400V396.143M100.267 400H107.642M100.267 388.429L105.184 384.571M100.267 388.429H116M100.267 388.429V392.286M110.1 380.714L116 376.086V380.714H110.1ZM110.1 380.714L107.642 382.643M116 384.571H105.184M105.184 384.571L107.642 382.643M116 392.286H100.267M100.267 392.286V396.143M115.616 396.143H100.267M107.642 382.643V400" stroke="black"/>
 </g>
 <g id="105">
-<rect id="b105" x="241.5" y="129.5" width="53" height="98" fill="#A5A5A5" stroke="black"/>
-<rect id="m105" x="294.5" y="129.5" width="42" height="57" fill="#A5A5A5" stroke="black"/>
-<rect id="unit105" x="240.5" y="130.5" width="95" height="95" stroke="black" stroke-width="3"/>
+<rect id="b105" x="193.112" y="348.5" width="42.5306" height="77" fill="#A5A5A5" stroke="black"/>
+<rect id="m105" x="235.837" y="348.5" width="33.6633" height="44.697" fill="#A5A5A5" stroke="black"/>
+<rect id="unit105" x="192.5" y="349.5" width="76" height="75" stroke="black" stroke-width="3"/>
 </g>
 <g id="107">
-<rect id="m107" x="336.5" y="129.5" width="44" height="57" fill="#A5A5A5" stroke="black"/>
-<rect id="b107" x="380.5" y="129.5" width="52" height="98" fill="#A5A5A5" stroke="black"/>
-<rect id="unit107" x="335.5" y="130.5" width="96" height="95" stroke="black" stroke-width="3"/>
+<rect id="m107" x="269.096" y="348.5" width="34.9091" height="45.1633" fill="#A5A5A5" stroke="black"/>
+<rect id="b107" x="304.5" y="348.5" width="41" height="76.7985" fill="#A5A5A5" stroke="black"/>
+<rect id="unit107" x="268.5" y="349.5" width="76" height="75" stroke="black" stroke-width="3"/>
 </g>
 <g id="109">
-<rect id="b109" x="432.52" y="129.5" width="52.5408" height="98" fill="#A5A5A5" stroke="black"/>
-<rect id="m109" x="485.051" y="129.5" width="43.449" height="57" fill="#A5A5A5" stroke="black"/>
-<rect id="unit109" x="431.5" y="130.5" width="94.9898" height="95" stroke="black" stroke-width="3"/>
+<rect id="b109" x="345.5" y="348.5" width="41" height="77" fill="#A5A5A5" stroke="black"/>
+<rect id="m109" x="386.48" y="348.5" width="34.0204" height="45.8687" fill="#A5A5A5" stroke="black"/>
+<rect id="unit109" x="344.5" y="349.5" width="77" height="75" stroke="black" stroke-width="3"/>
 </g>
-<rect id="kamera hran" x="528.5" y="129.5" width="45" height="97" fill="#D9D9D9" stroke="black"/>
+<rect id="kamera hran" x="421.5" y="348.5" width="33" height="77" fill="#D9D9D9" stroke="black"/>
 </g>
+<rect id="wc" x="539.5" y="348.5" width="34" height="77" fill="#D9D9D9" stroke="black"/>
 </g>
 <defs>
 <clipPath id="clip0_9_75">
-<rect x="766" y="130" width="531" height="97" fill="white"/>
+<rect x="455" y="348" width="571" height="78" fill="white"/>
 </clipPath>
 <clipPath id="clip1_9_75">
-<rect width="624" height="100" fill="white" transform="translate(1 254)"/>
+<rect width="497" height="78" fill="white" transform="translate(4 448)"/>
 </clipPath>
 <clipPath id="clip2_9_75">
-<rect width="672" height="100" fill="white" transform="translate(625)"/>
+<rect width="530" height="79" fill="white" transform="translate(496 247)"/>
 </clipPath>
 <clipPath id="clip3_9_75">
-<rect width="572" height="98" fill="white" transform="translate(1 129)"/>
+<rect width="451" height="78" fill="white" transform="translate(4 348)"/>
 </clipPath>
 </defs>
 </svg>

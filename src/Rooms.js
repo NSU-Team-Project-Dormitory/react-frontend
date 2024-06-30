@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './styles/App.css';
 import Popup from './Popup';
 import FloorList from './FloorList';
@@ -21,15 +21,35 @@ const Rooms = () => {
     largeRoom: false,
   });
   const [svgOpacity, setSvgOpacity] = useState(100);
-  const [isResizing, setIsResizing] = useState(false);
-  const [size, setSize] = useState({ width: '100%', height: '100%' });
-  const [resizeCorner, setResizeCorner] = useState(null);
-  const [startResize, setStartResize] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  const [imageWidth, setImageWidth] = useState(100); // State for PNG image width
+  const [imageHeight, setImageHeight] = useState(100); // State for PNG image height
 
   useEffect(() => {
     const floorPlans = ['floor1.svg', 'floor2.svg', 'floor3.svg'];
     setFloors(floorPlans);
   }, []);
+
+  // Handle resizing the PNG image
+  const handleIncreaseWidth = () => {
+    setImageWidth(prevWidth => prevWidth * 1.1);
+  };
+
+  const handleDecreaseWidth = () => {
+    setImageWidth(prevWidth => prevWidth * 0.9);
+  };
+
+  const handleIncreaseHeight = () => {
+    setImageHeight(prevHeight => prevHeight * 1.1);
+  };
+
+  const handleDecreaseHeight = () => {
+    setImageHeight(prevHeight => prevHeight * 0.9);
+  };
+
+  const handleResetSize = () => {
+    setImageWidth(100);
+    setImageHeight(100);
+  };
 
   useEffect(() => {
     if (svgContainerRef.current) {
@@ -115,7 +135,7 @@ const Rooms = () => {
     const file = event.target.files[0];
     if (file && file.type === 'image/svg+xml') {
       const reader = new FileReader();
-      reader.onload = function(e) {
+      reader.onload = function (e) {
         const parser = new DOMParser();
         const doc = parser.parseFromString(e.target.result, 'image/svg+xml');
         const roomElements = doc.querySelectorAll('rect[id^="m"], rect[id^="b"]');
@@ -126,32 +146,54 @@ const Rooms = () => {
         const newFloor = {
           name: file.name,
           content: e.target.result,
+          svgWidth: doc.documentElement.getAttribute('width'),
+          svgHeight: doc.documentElement.getAttribute('height'),
         };
-        setFloors(prevFloors => [...prevFloors, newFloor.name]);
-        setUploadedFloors(prevUploadedFloors => ({
+        setFloors((prevFloors) => [...prevFloors, newFloor.name]);
+        setUploadedFloors((prevUploadedFloors) => ({
           ...prevUploadedFloors,
           [newFloor.name]: newFloor.content,
         }));
         setRoomNames(newRoomNames);
         setSvgContent(newFloor.content);
         setSelectedFloor(newFloor.name);
+
+        // Scale SVG to fit within container
+        scaleSvgToFit(doc.documentElement.getAttribute('width'), doc.documentElement.getAttribute('height'));
       };
       reader.readAsText(file);
     } else {
-      alert('Пожалуйста, загрузите файл в формате SVG.');
+      alert('Please upload an SVG file.');
     }
+  };
+
+  const scaleSvgToFit = (svgWidth, svgHeight) => {
+    if (!svgContainerRef.current || !svgWidth || !svgHeight) return;
+
+    const containerWidth = svgContainerRef.current.clientWidth;
+    const containerHeight = svgContainerRef.current.clientHeight;
+
+    const widthRatio = containerWidth / svgWidth;
+    const heightRatio = containerHeight / svgHeight;
+    const scaleFactor = Math.min(widthRatio, heightRatio);
+
+    const scaledWidth = svgWidth * scaleFactor;
+    const scaledHeight = svgHeight * scaleFactor;
+
+    svgContainerRef.current.style.width = `${scaledWidth}px`;
+    svgContainerRef.current.style.height = `${scaledHeight}px`;
   };
 
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
-    setFilters(prevFilters => ({
+    setFilters((prevFilters) => ({
       ...prevFilters,
       [name]: checked,
     }));
   };
 
   const handleSaveRoomName = (rectId, name) => {
-    setRoomNames(prevRoomNames => ({
+    setRoomNames((prevRoomNames) => ({
       ...prevRoomNames,
       [rectId]: name,
     }));
@@ -161,8 +203,8 @@ const Rooms = () => {
     const roomElement = doc.getElementById(rectId);
 
     if (roomElement) {
-      roomElement.setAttribute("data-name", name);
-      const titleElement = doc.createElementNS(doc.documentElement.namespaceURI, "title");
+      roomElement.setAttribute('data-name', name);
+      const titleElement = doc.createElementNS(doc.documentElement.namespaceURI, 'title');
       titleElement.textContent = name;
       roomElement.appendChild(titleElement);
 
@@ -170,7 +212,7 @@ const Rooms = () => {
       const updatedSvgContent = serializer.serializeToString(doc);
       setSvgContent(updatedSvgContent);
 
-      setUploadedFloors(prevUploadedFloors => ({
+      setUploadedFloors((prevUploadedFloors) => ({
         ...prevUploadedFloors,
         [selectedFloor]: updatedSvgContent,
       }));
@@ -190,88 +232,38 @@ const Rooms = () => {
     if (file && file.type.includes('image/png')) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setUploadedImages(prevUploadedImages => ({
-          ...prevUploadedImages,
-          [selectedFloor]: e.target.result,
-        }));
+        const img = new Image();
+        img.onload = () => {
+          const maxWidth = svgContainerRef.current.clientWidth;
+          const maxHeight = svgContainerRef.current.clientHeight;
+
+          let scaleFactor = 1;
+          if (img.width > maxWidth || img.height > maxHeight) {
+            const widthScale = maxWidth / img.width;
+            const heightScale = maxHeight / img.height;
+            scaleFactor = Math.min(widthScale, heightScale);
+          }
+
+          setImageWidth(img.width * scaleFactor);
+          setImageHeight(img.height * scaleFactor);
+
+          setUploadedImages((prevUploadedImages) => ({
+            ...prevUploadedImages,
+            [selectedFloor]: e.target.result,
+          }));
+        };
+        img.src = e.target.result;
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleResizeMouseDown = (corner) => (event) => {
-    setIsResizing(true);
-    setResizeCorner(corner);
-    const containerRect = svgContainerRef.current.getBoundingClientRect();
-    setStartResize({
-      x: event.clientX,
-      y: event.clientY,
-      width: containerRect.width,
-      height: containerRect.height,
-    });
-  };
-
-  const handleResizeMouseUp = () => {
-    setIsResizing(false);
-    setResizeCorner(null);
-  };
-
-  const handleResizeMouseMove = (event) => {
-    if (isResizing && resizeCorner) {
-      const startX = startResize.x;
-      const startY = startResize.y;
-      const startWidth = startResize.width;
-      const startHeight = startResize.height;
-
-      let newWidth, newHeight;
-
-      if (resizeCorner === 'se') {
-        newWidth = `${startWidth + (event.clientX - startX)}px`;
-        newHeight = `${startHeight + (event.clientY - startY)}px`;
-      } else if (resizeCorner === 'sw') {
-        newWidth = `${startWidth - (event.clientX - startX)}px`;
-        newHeight = `${startHeight + (event.clientY - startY)}px`;
-      } else if (resizeCorner === 'ne') {
-        newWidth = `${startWidth + (event.clientX - startX)}px`;
-        newHeight = `${startHeight - (event.clientY - startY)}px`;
-      } else if (resizeCorner === 'nw') {
-        newWidth = `${startWidth - (event.clientX - startX)}px`;
-        newHeight = `${startHeight - (event.clientY - startY)}px`;
-      }
-
-      setSize({ width: newWidth, height: newHeight });
-    }
-  };
-
-  useEffect(() => {
-    const handleResize = () => {
-      const containerRect = svgContainerRef.current.getBoundingClientRect();
-      const { clientWidth, clientHeight } = document.documentElement;
-
-      let newWidth = containerRect.width;
-      let newHeight = containerRect.height;
-
-      if (containerRect.right > clientWidth) {
-        newWidth -= containerRect.right - clientWidth;
-      }
-
-      if (containerRect.bottom > clientHeight) {
-        newHeight -= containerRect.bottom - clientHeight;
-      }
-
-      setSize({ width: `${newWidth}px`, height: `${newHeight}px` });
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
-    <div className="App" onMouseMove={handleResizeMouseMove} onMouseUp={handleResizeMouseUp}>
+    <div className="App">
       <div className="sidebar">
         <FloorList floors={floors} onSelectFloor={setSelectedFloor} />
-        <button onClick={handleAddFloor}>Добавить планировку</button>
-        <button onClick={handleAddImage}>Добавить PNG</button>
+        <button onClick={handleAddFloor}>добавить svg </button>
+        <button onClick={handleAddImage}>добавить PNG</button>
         <input
           type="file"
           ref={fileInputRef}
@@ -294,38 +286,44 @@ const Rooms = () => {
           onChange={handleImageUpload}
         />
         <CheckboxList onChange={handleCheckboxChange} />
+        <div>
+          <button onClick={handleIncreaseWidth}>увеличить PNG по ширине</button>
+          <button onClick={handleDecreaseWidth}>уменьшить PNG по ширине</button>
+          <button onClick={handleIncreaseHeight}>увеличить PNG по высоте</button>
+          <button onClick={handleDecreaseHeight}>уменьшить PNG по высоте</button>
+          <button onClick={handleResetSize}>сбросить настройки PNG </button>
+        </div>
       </div>
       <div className="main-content">
-        <div className="image-container" style={{ position: 'relative', width: '100%', height: '100%', background: 'grey' }}>
+        <div
+          className="image-container"
+          style={{ position: 'relative', width: '100%', height: '100%', background: 'grey' }}
+        >
           {uploadedImages[selectedFloor] && (
             <img
               src={uploadedImages[selectedFloor]}
               alt="overlay"
-              style={{ position: 'absolute', width: size.width, height: size.height, top: 0, left: 0 }}
+              style={{
+                position: 'absolute',
+                width: `${imageWidth}px`,
+                height: `${imageHeight}px`,
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
             />
           )}
           <div
             className="svg-container"
             ref={svgContainerRef}
             onClick={handleRoomClick}
-            style={{ position: 'absolute', width: size.width, height: size.height, overflow: 'hidden' }}
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+            }}
             dangerouslySetInnerHTML={{ __html: svgContent }}
           />
-          {['se', 'sw', 'ne', 'nw'].map(corner => (
-            <div
-              key={corner}
-              style={{
-                position: 'absolute',
-                width: '20px',
-                height: '20px',
-                background: 'red',
-                cursor: `${corner}-resize`,
-                [corner.split('')[0]]: 0,
-                [corner.split('')[1]]: 0,
-              }}
-              onMouseDown={handleResizeMouseDown(corner)}
-            />
-          ))}
         </div>
         {popupData && (
           <Popup
