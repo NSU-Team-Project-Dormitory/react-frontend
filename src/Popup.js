@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './styles/Popup.css';
 
-const Popup = ({ rectId, rectName, position, onClose, onSave }) => {
+const Popup = ({ rectId, position, residents, rectName, onClose, onSave }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(rectName || rectId);
   const [message, setMessage] = useState('');
@@ -39,6 +39,18 @@ const Popup = ({ rectId, rectName, position, onClose, onSave }) => {
         ) : (
           <>
             <p>{`Комната: ${rectName || rectId}`}</p>
+            <h3>Жители:</h3>
+            {residents && residents.length > 0 ? (
+                <ul>
+                  {residents.map((resident, index) => (
+                      <li key={index}>
+                        {resident.firstName} {resident.lastName} {resident.patronymic}
+                      </li>
+                  ))}
+                </ul>
+            ) : (
+                <p>Нет жителей</p>
+            )}
             <button onClick={() => setIsEditing(true)}>Изменить название</button>
           </>
         )}
