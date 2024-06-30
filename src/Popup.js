@@ -6,6 +6,7 @@ const Popup = ({ rectId, position, residents, rectName, onClose, onSave }) => {
   const [name, setName] = useState(rectName || rectId);
   const [message, setMessage] = useState('');
   const { x, y } = position;
+
   const [newResident, setNewResident] = useState({ firstName: '', lastName: '', patronymic: '', roomNumber: ''});
 
   const apiUrl = process.env.REACT_APP_API_URL;
@@ -15,9 +16,14 @@ const Popup = ({ rectId, position, residents, rectName, onClose, onSave }) => {
     setNewResident({ ...newResident, [name]: value });
   };
 
+
   useEffect(() => {
     setName(rectName || rectId);
   }, [rectId, rectName]);
+
+  useEffect(() => {
+    console.log('Selected Room in Popup:', selectedRoom);
+  }, [selectedRoom]);
 
   const handleSave = () => {
     onSave(rectId, name);
@@ -28,6 +34,7 @@ const Popup = ({ rectId, position, residents, rectName, onClose, onSave }) => {
   const handlePopupClick = (e) => {
     e.stopPropagation();
   };
+
 
   const addResident = async () => {
     const url = `${apiUrl}/Residents/CreateResident`;
@@ -53,6 +60,7 @@ const Popup = ({ rectId, position, residents, rectName, onClose, onSave }) => {
       alert('Resident added successfully');
     }
   };
+
 
   return (
     <div className="popup" style={{ top: y, left: x }} onClick={handlePopupClick}>
@@ -108,6 +116,7 @@ const Popup = ({ rectId, position, residents, rectName, onClose, onSave }) => {
               <button onClick={addResident}>Добавить жильца  </button>
               <button onClick={() => setIsEditing(true)}>Изменить название</button>
             </>
+
         )}
       </div>
     </div>

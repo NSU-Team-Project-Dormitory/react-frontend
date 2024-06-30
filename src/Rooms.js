@@ -23,6 +23,12 @@ const Rooms = () => {
   const [svgOpacity, setSvgOpacity] = useState(100);
   const [imageWidth, setImageWidth] = useState(100); // State for PNG image width
   const [imageHeight, setImageHeight] = useState(100); // State for PNG image height
+  const [initialImageWidth, setInitialImageWidth] = useState(100); // State for initial PNG image width
+  const [initialImageHeight, setInitialImageHeight] = useState(100); // State for initial PNG image height
+  const [isDragging, setIsDragging] = useState(false); // State for dragging
+  const [imagePosition, setImagePosition] = useState({ top: '50%', left: '50%' }); // State for PNG position
+  const [initialImagePosition, setInitialImagePosition] = useState({ top: '50%', left: '50%' }); // State for initial PNG position
+  const [isPngVisible, setIsPngVisible] = useState(true); // State for PNG visibility
 
   useEffect(() => {
     const floorPlans = ['floor1.svg', 'floor2.svg', 'floor3.svg'];
@@ -31,24 +37,27 @@ const Rooms = () => {
 
   // Handle resizing the PNG image
   const handleIncreaseWidth = () => {
-    setImageWidth(prevWidth => prevWidth * 1.1);
+    setImageWidth(prevWidth => prevWidth * 1.03);
   };
 
   const handleDecreaseWidth = () => {
-    setImageWidth(prevWidth => prevWidth * 0.9);
+    setImageWidth(prevWidth => prevWidth * 0.98);
   };
 
   const handleIncreaseHeight = () => {
-    setImageHeight(prevHeight => prevHeight * 1.1);
+    setImageHeight(prevHeight => prevHeight * 1.03);
   };
 
   const handleDecreaseHeight = () => {
-    setImageHeight(prevHeight => prevHeight * 0.9);
+    setImageHeight(prevHeight => prevHeight * 0.98);
   };
-
+  
   const handleResetSize = () => {
-    setImageWidth(1000);
-    setImageHeight(500);
+
+    setImageWidth(initialImageWidth);
+    setImageHeight(initialImageHeight);
+    setImagePosition(initialImagePosition);
+
   };
 
   useEffect(() => {
@@ -269,6 +278,11 @@ const Rooms = () => {
           setImageWidth(img.width * scaleFactor);
           setImageHeight(img.height * scaleFactor);
 
+          // Store the initial values
+          setInitialImageWidth(img.width * scaleFactor);
+          setInitialImageHeight(img.height * scaleFactor);
+          setInitialImagePosition({ top: '50%', left: '50%' });
+
           setUploadedImages((prevUploadedImages) => ({
             ...prevUploadedImages,
             [selectedFloor]: e.target.result,
@@ -280,12 +294,33 @@ const Rooms = () => {
     }
   };
 
+  const handleDragStart = (event) => {
+    setIsDragging(true);
+  };
+
+  const handleDragEnd = (event) => {
+    setIsDragging(false);
+  };
+
+  const handleDrag = (event) => {
+    if (isDragging) {
+      const containerRect = svgContainerRef.current.getBoundingClientRect();
+      const newLeft = event.clientX - containerRect.left;
+      const newTop = event.clientY - containerRect.top;
+      setImagePosition({ top: `${newTop}px`, left: `${newLeft}px` });
+    }
+  };
+
+  const handlePngVisibilityChange = () => {
+    setIsPngVisible(!isPngVisible);
+  };
+
   return (
-    <div className="App">
+    <div className="App" onMouseMove={handleDrag} onMouseUp={handleDragEnd}>
       <div className="sidebar">
         <FloorList floors={floors} onSelectFloor={setSelectedFloor} />
-        <button onClick={handleAddFloor}>добавить svg </button>
-        <button onClick={handleAddImage}>добавить PNG</button>
+        <button onClick={handleAddFloor}>Add Floor Plan</button>
+        <button onClick={handleAddImage}>Add PNG</button>
         <input
           type="file"
           ref={fileInputRef}
@@ -309,11 +344,24 @@ const Rooms = () => {
         />
         <CheckboxList onChange={handleCheckboxChange} />
         <div>
-          <button onClick={handleIncreaseWidth}>увеличить PNG по ширине</button>
-          <button onClick={handleDecreaseWidth}>уменьшить PNG по ширине</button>
-          <button onClick={handleIncreaseHeight}>увеличить PNG по высоте</button>
-          <button onClick={handleDecreaseHeight}>уменьшить PNG по высоте</button>
-          <button onClick={handleResetSize}>сбросить настройки PNG </button>
+          <button onClick={handleIncreaseWidth}>Increase PNG Width</button>
+          <button onClick={handleDecreaseWidth}>Decrease PNG Width</button>
+          <button onClick={handleIncreaseHeight}>Increase PNG Height</button>
+          <button onClick={handleDecreaseHeight}>Decrease PNG Height</button>
+          <button onClick={handleResetSize}>Reset PNG Size</button>
+        </div>
+        <div>
+          <button onMouseDown={handleDragStart} onMouseUp={handleDragEnd}>
+            Move PNG
+          </button>
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            checked={isPngVisible}
+            onChange={handlePngVisibilityChange}
+          />
+          <label>{isPngVisible ? 'Hide PNG' : 'Show PNG'}</label>
         </div>
       </div>
       <div className="main-content">
@@ -321,7 +369,7 @@ const Rooms = () => {
           className="image-container"
           style={{ position: 'relative', width: '100%', height: '100%', background: 'grey' }}
         >
-          {uploadedImages[selectedFloor] && (
+          {isPngVisible && uploadedImages[selectedFloor] && (
             <img
               src={uploadedImages[selectedFloor]}
               alt="overlay"
@@ -329,10 +377,13 @@ const Rooms = () => {
                 position: 'absolute',
                 width: `${imageWidth}px`,
                 height: `${imageHeight}px`,
-                top: '50%',
-                left: '50%',
+                top: imagePosition.top,
+                left: imagePosition.left,
                 transform: 'translate(-50%, -50%)',
+                cursor: isDragging ? 'grabbing' : 'grab',
               }}
+              onMouseDown={handleDragStart}
+              onMouseUp={handleDragEnd}
             />
           )}
           <div className="svg-container" ref={svgContainerRef} dangerouslySetInnerHTML={{__html: svgContent}}
