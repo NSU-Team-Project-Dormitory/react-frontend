@@ -6,6 +6,14 @@ const Popup = ({ rectId, position, residents, rectName, onClose, onSave }) => {
   const [name, setName] = useState(rectName || rectId);
   const [message, setMessage] = useState('');
   const { x, y } = position;
+  const [newResident, setNewResident] = useState({ firstName: '', lastName: '', patronymic: '', roomNumber: ''});
+
+  const apiUrl = process.env.REACT_APP_API_URL;
+  
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewResident({ ...newResident, [name]: value });
+  };
 
   useEffect(() => {
     setName(rectName || rectId);
@@ -19,6 +27,31 @@ const Popup = ({ rectId, position, residents, rectName, onClose, onSave }) => {
 
   const handlePopupClick = (e) => {
     e.stopPropagation();
+  };
+
+  const addResident = async () => {
+    const url = `${apiUrl}/Residents/CreateResident`;
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newResident),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      // const addedResident = await response.json();
+      onSave(rectId, newResident);
+      setNewResident({ firstName: '', lastName: '', patronymic: '', roomNumber: rectId});
+      alert('Failed to add resident');
+    } catch (error) {
+      console.error('Error adding resident:', error);
+      alert('Resident added successfully');
+    }
   };
 
   return (
@@ -37,22 +70,44 @@ const Popup = ({ rectId, position, residents, rectName, onClose, onSave }) => {
             <button onClick={handleSave}>Сохранить</button>
           </>
         ) : (
-          <>
-            <p>{`Комната: ${rectName || rectId}`}</p>
-            <h3>Жители:</h3>
-            {residents && residents.length > 0 ? (
-                <ul>
-                  {residents.map((resident, index) => (
-                      <li key={index}>
-                        {resident.firstName} {resident.lastName} {resident.patronymic}
-                      </li>
-                  ))}
-                </ul>
-            ) : (
-                <p>Нет жителей</p>
-            )}
-            <button onClick={() => setIsEditing(true)}>Изменить название</button>
-          </>
+            <>
+              <p>{`Комната: ${rectName || rectId}`}</p>
+              <h3>Жители:</h3>
+              {residents && residents.length > 0 ? (
+                  <ul>
+                    {residents.map((resident, index) => (
+                        <li key={index}>
+                          {resident.firstName} {resident.lastName} {resident.patronymic}
+                        </li>
+                    ))}
+                  </ul>
+              ) : (
+                  <p>Нет жителей</p>
+              )}
+              <input
+                  type="text"
+                  name="firstName"
+                  placeholder="Имя"
+                  value={newResident.firstName}
+                  onChange={handleInputChange}
+              />
+              <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Фамилия"
+                  value={newResident.lastName}
+                  onChange={handleInputChange}
+              />
+              <input
+                  type="text"
+                  name="patronymic"
+                  placeholder="Отчество"
+                  value={newResident.patronymic}
+                  onChange={handleInputChange}
+              />
+              <button onClick={addResident}>Добавить жильца  </button>
+              <button onClick={() => setIsEditing(true)}>Изменить название</button>
+            </>
         )}
       </div>
     </div>
