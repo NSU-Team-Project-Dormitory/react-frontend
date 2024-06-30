@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
 import './styles/App.css';
 import Popup from './Popup';
 import FloorList from './FloorList';
@@ -29,20 +28,11 @@ const Rooms = () => {
   const [isDragging, setIsDragging] = useState(false); // State for dragging
   const [imagePosition, setImagePosition] = useState({ top: '50%', left: '50%' }); // State for PNG position
   const [initialImagePosition, setInitialImagePosition] = useState({ top: '50%', left: '50%' }); // State for initial PNG position
-
-  const [rooms, setRooms] = useState([]);
-
+  const [isPngVisible, setIsPngVisible] = useState(true); // State for PNG visibility
 
   useEffect(() => {
     const floorPlans = ['floor1.svg', 'floor2.svg', 'floor3.svg'];
     setFloors(floorPlans);
-      axios.get('http://localhost:5000/rooms')
-        .then(response => {
-          setRooms(response.data);
-        })
-        .catch(error => {
-          console.error('Error fetching rooms data:', error);
-        });
   }, []);
 
   // Handle resizing the PNG image
@@ -115,33 +105,18 @@ const Rooms = () => {
   const handleRoomClick = (event) => {
     const rectElement = event.target.closest('rect');
     if (rectElement) {
-      const rectId1 = rectElement.id;
+      const rectId = rectElement.id;
       const rectPosition = rectElement.getBoundingClientRect();
       const containerPosition = svgContainerRef.current.getBoundingClientRect();
       const x = rectPosition.left - containerPosition.left + rectPosition.width / 2;
       const y = rectPosition.top - containerPosition.top + rectPosition.height / 2;
 
-      // Log the rectId and rooms array
-      console.log('Clicked rectId:', rectId1);
-      console.log('Rooms array:', rooms);
-
-      const selectedRoom = rooms.find(room => room.id === rectId1);
-      const rectId = selectedRoom;
-
-      console.log('Selected Room:', selectedRoom);
-
-      if (selectedRoom) {
-        console.log('Selected Room:', selectedRoom);
-        setPopupData({ rectId, position: { x, y } });
-      } else {
-        console.warn('Room not found for rectId:', rectId1);
-      }
+      setPopupData({ rectId, position: { x, y } });
     } else {
       setPopupData(null);
     }
   };
-  
-  
+
   const handleClickOutside = (event) => {
     if (svgContainerRef.current && !svgContainerRef.current.contains(event.target)) {
       setPopupData(null);
@@ -312,6 +287,10 @@ const Rooms = () => {
     }
   };
 
+  const handlePngVisibilityChange = () => {
+    setIsPngVisible(!isPngVisible);
+  };
+
   return (
     <div className="App" onMouseMove={handleDrag} onMouseUp={handleDragEnd}>
       <div className="sidebar">
@@ -352,13 +331,21 @@ const Rooms = () => {
             Move PNG
           </button>
         </div>
+        <div>
+          <input
+            type="checkbox"
+            checked={isPngVisible}
+            onChange={handlePngVisibilityChange}
+          />
+          <label>{isPngVisible ? 'Hide PNG' : 'Show PNG'}</label>
+        </div>
       </div>
       <div className="main-content">
         <div
           className="image-container"
           style={{ position: 'relative', width: '100%', height: '100%', background: 'grey' }}
         >
-          {uploadedImages[selectedFloor] && (
+          {isPngVisible && uploadedImages[selectedFloor] && (
             <img
               src={uploadedImages[selectedFloor]}
               alt="overlay"
@@ -394,7 +381,6 @@ const Rooms = () => {
             position={popupData.position}
             onClose={() => setPopupData(null)}
             onSave={handleSaveRoomName}
-            roomData={popupData.roomData} // Pass roomData to the Popup component
           />
         )}
       </div>
