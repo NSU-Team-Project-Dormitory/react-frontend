@@ -53,9 +53,11 @@ const Rooms = () => {
   };
   
   const handleResetSize = () => {
+
     setImageWidth(initialImageWidth);
     setImageHeight(initialImageHeight);
     setImagePosition(initialImagePosition);
+
   };
 
   useEffect(() => {
@@ -102,7 +104,9 @@ const Rooms = () => {
     setSvgContent(modifiedSvg);
   }, [svgContent, filters]);
 
-  const handleRoomClick = (event) => {
+  const apiUrl = process.env.REACT_APP_API_URL;
+
+  const handleRoomClick = async (event) => {
     const rectElement = event.target.closest('rect');
     if (rectElement) {
       const rectId = rectElement.id;
@@ -111,7 +115,27 @@ const Rooms = () => {
       const x = rectPosition.left - containerPosition.left + rectPosition.width / 2;
       const y = rectPosition.top - containerPosition.top + rectPosition.height / 2;
 
-      setPopupData({ rectId, position: { x, y } });
+      const queryParameters = new URLSearchParams({
+        RoomTitle: rectId.toString(),
+      }).toString();
+
+      const url = `${apiUrl}/Residents/GetResidentsByRoomTitle?${queryParameters}`;
+      
+      try {
+        const response = await fetch(url);
+        console.log('Response status:', response.status);
+        if (response.ok) {
+          const res = await response.json();
+          console.log(res.residents);
+          setPopupData({ rectId, position: { x, y }, residents: res.residents });
+        } else {
+          console.log("No residents");
+          setPopupData({ rectId, position: { x, y }, residents: [] });
+        }  
+      } catch (e) {
+        setPopupData({ rectId, position: {x, y} });
+      }
+      
     } else {
       setPopupData(null);
     }
@@ -362,26 +386,18 @@ const Rooms = () => {
               onMouseUp={handleDragEnd}
             />
           )}
-          <div
-            className="svg-container"
-            ref={svgContainerRef}
-            onClick={handleRoomClick}
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-            }}
-            dangerouslySetInnerHTML={{ __html: svgContent }}
-          />
+          <div className="svg-container" ref={svgContainerRef} dangerouslySetInnerHTML={{__html: svgContent}}
+               onClick={handleRoomClick}></div>
+
         </div>
         {popupData && (
-          <Popup
-            rectId={popupData.rectId}
-            rectName={roomNames[popupData.rectId]}
-            position={popupData.position}
-            onClose={() => setPopupData(null)}
-            onSave={handleSaveRoomName}
-          />
+            <Popup
+                rectId={popupData.rectId}
+                position={popupData.position}
+                residents={popupData.residents}
+                onClose={() => setPopupData(null)}
+                onSave={handleSaveRoomName}
+            />
         )}
       </div>
     </div>
